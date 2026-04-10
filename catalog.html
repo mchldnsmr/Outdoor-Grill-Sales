@@ -1,2 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop the Catalog | Outdoor Grill Sales — Weatherford, TX</title>
+  <meta name="description" content="Browse premium grills, outdoor kitchens, pizza ovens, smokers, griddles, and accessories from top brands. Call for pricing or book an appointment.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="assets/logo.png" type="image/png">
+</head>
+<body>
 
+<div id="progress-bar"></div>
 
+<div id="announce-banner" style="display:none;">
+  <span class="banner-text"></span>
+</div>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <img src="assets/logo.png" alt="Outdoor Grill Sales" onerror="this.style.display='none'">
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="catalog.html" class="active">Shop</a></li>
+    <li><a href="brands.html">Brands</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="nav-cta">Book Appointment</a></li>
+  </ul>
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="nav-drawer" id="nav-drawer">
+  <a href="index.html">Home</a>
+  <a href="catalog.html" class="active">Shop</a>
+  <a href="brands.html">Brands</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html" class="drawer-cta">Book Appointment</a>
+  <span class="drawer-contact">817-550-6038 &nbsp;|&nbsp; Weatherford, TX</span>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-top">
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="section-label">Browse Our Collection</div>
+      <h1 class="page-hero-title">Shop the<br><span>Catalog</span></h1>
+      <p class="page-hero-sub">Every product below is available in our Weatherford showroom. Call for current pricing, availability, or to schedule a visit.</p>
+      <div style="margin-top:1.5rem; display:flex; gap:0.75rem; align-items:center; flex-wrap:wrap;">
+        <a href="tel:8175506038" class="btn-primary">Call for Pricing: 817-550-6038</a>
+        <a href="contact.html" class="btn-ghost">Book a Showroom Visit</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTER TABS -->
+  <div class="catalog-filter" id="catalog-start">
+    <button class="filter-btn active" data-filter="all">All Products</button>
+    <button class="filter-btn" data-filter="grills">Grills</button>
+    <button class="filter-btn" data-filter="smokers">Smokers</button>
+    <button class="filter-btn" data-filter="pizza">Pizza Ovens</button>
+    <button class="filter-btn" data-filter="griddles">Griddles</button>
+    <button class="filter-btn" data-filter="kitchen">Outdoor Kitchens</button>
+    <button class="filter-btn" data-filter="heaters">Heaters</button>
+    <button class="filter-btn" data-filter="accessories">Accessories</button>
+  </div>
+
+  <!-- ─── GRILLS ─── -->
+  <div class="catalog-category reveal" data-category="grills">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Premium Selection</div>
+        <h2 class="category-title">Grills &amp; Gas Grills</h2>
+      </div>
+      <span class="category-count">Gas &nbsp;|&nbsp; Pellet &nbsp;|&nbsp; Ceramic &nbsp;|&nbsp; Charcoal</span>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/blaze-40-5burner.jpg" alt="Blaze 40-Inch 5-Burner LTE" onerror="this.src='assets/brand-blaze.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Blaze</div>
+          <div class="product-name">40-Inch 5-Burner Premium LTE</div>
+          <div class="product-price">$2,699</div>
+          <a href="contact.html?interest=Blaze+40-Inch+5-Burner+LTE" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/blaze-40-gas.jpg" alt="Blaze 40-Inch Gas Grill" onerror="this.src='assets/brand-blaze.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Blaze</div>
+          <div class="product-name">40-Inch Gas Grill</div>
+          <div class="product-price">$2,499</div>
+          <a href="contact.html?interest=Blaze+40-Inch+Gas+Grill" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/lynx-36-freestanding.jpg" alt="Lynx Professional 36 Freestanding" onerror="this.src='assets/brand-lynx.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Lynx</div>
+          <div class="product-name">Professional 36" Freestanding</div>
+          <div class="product-price">$8,500</div>
+          <a href="contact.html?interest=Lynx+Professional+36+Freestanding" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/lynx-36-builtin.jpg" alt="Lynx Built-In 36 Grill" onerror="this.src='assets/brand-lynx.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Lynx</div>
+          <div class="product-name">Built-In 36" Grill</div>
+          <div class="product-price">$7,699</div>
+          <a href="contact.html?interest=Lynx+Built-In+36+Grill" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-prestige-500.jpg" alt="Napoleon Prestige 500 Propane" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Prestige 500 Propane RSIB</div>
+          <div class="product-price">$1,399</div>
+          <a href="contact.html?interest=Napoleon+Prestige+500+Propane" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-prestige-pro-500.jpg" alt="Napoleon Prestige Pro 500" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Prestige Pro 500 RSIB Propane</div>
+          <div class="product-price">$2,499</div>
+          <a href="contact.html?interest=Napoleon+Prestige+Pro+500+RSIB" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-prestige-665.jpg" alt="Napoleon Prestige 665 RSIB" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Prestige 665 RSIB</div>
+          <div class="product-price">$2,199</div>
+          <a href="contact.html?interest=Napoleon+Prestige+665+RSIB" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-rogue-425.jpg" alt="Napoleon Rogue XT 425 SIB" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Rogue XT 425 SIB</div>
+          <div class="product-price">$1,099</div>
+          <a href="contact.html?interest=Napoleon+Rogue+XT+425+SIB" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-phantom-500.jpg" alt="Napoleon Phantom Prestige 500" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Phantom Prestige 500 RSIB</div>
+          <div class="product-price">$1,999</div>
+          <a href="contact.html?interest=Napoleon+Phantom+Prestige+500" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/blaze-kamado.jpg" alt="Blaze Aluminum Kamado" onerror="this.src='assets/brand-blaze.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Blaze</div>
+          <div class="product-name">Aluminum Kamado</div>
+          <div class="product-price">$1,850</div>
+          <a href="contact.html?interest=Blaze+Aluminum+Kamado" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/primo-xlarge.jpg" alt="Primo X-Large Ceramic Grill" onerror="this.src='assets/brand-primo.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Primo</div>
+          <div class="product-name">X-Large Charcoal Ceramic Grill</div>
+          <div class="product-price">$1,699</div>
+          <a href="contact.html?interest=Primo+X-Large+Ceramic+Grill" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-travel-q.jpg" alt="Napoleon Travel Q Blue" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Travel Q Blue</div>
+          <div class="product-price">$350</div>
+          <a href="contact.html?interest=Napoleon+Travel+Q+Blue" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── SMOKERS ─── -->
+  <div class="catalog-category reveal" data-category="smokers">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Low &amp; Slow</div>
+        <h2 class="category-title">Smokers</h2>
+      </div>
+      <span class="category-count">Drum &nbsp;|&nbsp; Pellet &nbsp;|&nbsp; Wood Fire</span>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/gateway-55-straight.jpg" alt="Gateway Drum Smoker 55 Gallon" onerror="this.src='assets/brand-gateway.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Gateway Drum Smokers</div>
+          <div class="product-name">STRAIGHT UP 55 Gallon</div>
+          <div class="product-price">$1,299</div>
+          <a href="contact.html?interest=Gateway+Drum+Smoker+55+Gallon" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/gateway-30-straight.jpg" alt="Gateway Drum Smoker 30 Gallon" onerror="this.src='assets/brand-gateway.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Gateway Drum Smokers</div>
+          <div class="product-name">STRAIGHT UP 30 Gallon</div>
+          <div class="product-price">$899</div>
+          <a href="contact.html?interest=Gateway+Drum+Smoker+30+Gallon" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/memphis-builtin.jpg" alt="Memphis Wood Fire Elite" onerror="this.src='assets/brand-memphis.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Memphis Wood Fire</div>
+          <div class="product-name">Built-In Elite</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Memphis+Wood+Fire+Elite" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── PIZZA OVENS ─── -->
+  <div class="catalog-category reveal" data-category="pizza">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Wood-Fired</div>
+        <h2 class="category-title">Pizza Ovens</h2>
+      </div>
+      <span class="category-count">Gozney &nbsp;|&nbsp; Accessories</span>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/gozney-arc-xl.jpg" alt="Gozney Arc XL" onerror="this.src='assets/brand-gozney.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Gozney</div>
+          <div class="product-name">Arc XL - Bone</div>
+          <div class="product-price">$799</div>
+          <a href="contact.html?interest=Gozney+Arc+XL" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/gozney-dome.jpg" alt="Gozney Dome" onerror="this.src='assets/brand-gozney.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Gozney</div>
+          <div class="product-name">Dome Pizza Oven</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Gozney+Dome" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/gozney-peel.jpg" alt="Gozney Pro Placement Peel" onerror="this.src='assets/brand-gozney.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Gozney</div>
+          <div class="product-name">Pro Placement Peel</div>
+          <div class="product-price">$99</div>
+          <a href="contact.html?interest=Gozney+Pro+Placement+Peel" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── GRIDDLES ─── -->
+  <div class="catalog-category reveal" data-category="griddles">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Flat Top</div>
+        <h2 class="category-title">Griddles</h2>
+      </div>
+      <span class="category-count">Built-In &nbsp;|&nbsp; Freestanding</span>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/blaze-griddle-30.jpg" alt="Blaze Built-In 30 Gas Griddle" onerror="this.src='assets/brand-blaze.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Blaze</div>
+          <div class="product-name">Built-In Gas Griddle 30"</div>
+          <div class="product-price">$1,999</div>
+          <a href="contact.html?interest=Blaze+Built-In+Gas+Griddle+30" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-griddle.jpg" alt="Napoleon Dual Infrared Burner 700" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Dual Infrared Burner 700 Series</div>
+          <div class="product-price">$1,050</div>
+          <a href="contact.html?interest=Napoleon+Dual+Infrared+Burner+700" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── OUTDOOR KITCHENS ─── -->
+  <div class="catalog-category reveal" data-category="kitchen">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Full Setup</div>
+        <h2 class="category-title">Outdoor Kitchen Components</h2>
+      </div>
+      <span class="category-count">Built-In &nbsp;|&nbsp; Islands &nbsp;|&nbsp; Fridges &nbsp;|&nbsp; Doors</span>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-prestige-pro-builtin.jpg" alt="Napoleon Prestige Pro 500 Built-In" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Prestige Pro 500 Built-In w/ Fridge</div>
+          <div class="product-price">$2,299</div>
+          <a href="contact.html?interest=Napoleon+Prestige+Pro+500+Built-In" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-prestige-pro-665-builtin.jpg" alt="Napoleon Prestige Pro 665 Built-In" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">Built-in Prestige Pro 665 RB</div>
+          <div class="product-price">$2,999</div>
+          <a href="contact.html?interest=Napoleon+Prestige+Pro+665+Built-In" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/napoleon-700-builtin.jpg" alt="Napoleon 700 Built-In" onerror="this.src='assets/brand-napoleon.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Napoleon</div>
+          <div class="product-name">700 Series Built-In 38RB</div>
+          <div class="product-price">$2,399</div>
+          <a href="contact.html?interest=Napoleon+700+Series+Built-In+38RB" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/blaze-power-burner.jpg" alt="Blaze Power Burner" onerror="this.src='assets/brand-blaze.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Blaze</div>
+          <div class="product-name">Power Burner</div>
+          <div class="product-price">$1,399</div>
+          <a href="contact.html?interest=Blaze+Power+Burner" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+    </div>
+    <div style="margin-top:2rem; padding:2rem; background:var(--charcoal-2); border:1px solid var(--border-warm); display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+      <div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.04em; margin-bottom:0.3rem;">Full Outdoor Kitchen Installs Available</div>
+        <div style="font-family:'Crimson Pro',serif; font-size:0.95rem; color:var(--text-muted); font-style:italic;">Michael handles professional installation from start to finish. Let us build your dream backyard setup.</div>
+      </div>
+      <a href="services.html#install" class="btn-gold">Get an Estimate</a>
+    </div>
+  </div>
+
+  <!-- ─── HEATERS ─── -->
+  <div class="catalog-category reveal" data-category="heaters">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Stay Warm</div>
+        <h2 class="category-title">Outdoor Heaters</h2>
+      </div>
+      <span class="category-count">Patio &nbsp;|&nbsp; Freestanding</span>
+    </div>
+    <div class="product-grid">
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/heater-1.jpg" alt="Outdoor Heater" onerror="this.style.display='none'">
+        <div class="product-card-body">
+          <div class="product-brand">Outdoor Heaters</div>
+          <div class="product-name">Patio Heater - Freestanding</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Outdoor+Patio+Heater" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/heater-2.jpg" alt="Outdoor Heater" onerror="this.style.display='none'">
+        <div class="product-card-body">
+          <div class="product-brand">Outdoor Heaters</div>
+          <div class="product-name">Patio Heater - Wall Mount</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Outdoor+Wall+Heater" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── ACCESSORIES ─── -->
+  <div class="catalog-category reveal" data-category="accessories">
+    <div class="catalog-category-header">
+      <div>
+        <div class="section-label">Complete Your Setup</div>
+        <h2 class="category-title">Accessories &amp; More</h2>
+      </div>
+      <span class="category-count">Rubs &nbsp;|&nbsp; Cookware &nbsp;|&nbsp; Tools &nbsp;|&nbsp; Covers &nbsp;|&nbsp; Fuel</span>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/rubs-sauces.jpg" alt="Rubs and Sauces" onerror="this.style.background='var(--charcoal-4)'">
+        <div class="product-card-body">
+          <div class="product-brand">Various Brands</div>
+          <div class="product-name">Rubs, Sauces &amp; Seasonings</div>
+          <div class="product-price">Starting at $12</div>
+          <a href="contact.html?interest=Rubs+and+Sauces" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/lumber-jack-pellets.jpg" alt="Lumber Jack Pellets" onerror="this.style.background='var(--charcoal-4)'">
+        <div class="product-card-body">
+          <div class="product-brand">Lumber Jack</div>
+          <div class="product-name">Wood Pellets</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Lumber+Jack+Pellets" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/solostove.jpg" alt="Solo Stove" onerror="this.src='assets/brand-solostove.png'; this.style.padding='2rem'; this.style.objectFit='contain';">
+        <div class="product-card-body">
+          <div class="product-brand">Solo Stove</div>
+          <div class="product-name">Fire Pits &amp; Accessories</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Solo+Stove" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <img class="product-card-img" src="assets/products/madein-cookware.jpg" alt="Made In Cookware" onerror="this.style.background='var(--charcoal-4)'">
+        <div class="product-card-body">
+          <div class="product-brand">Made In</div>
+          <div class="product-name">Professional Cookware</div>
+          <div class="product-price">Contact for Pricing</div>
+          <a href="contact.html?interest=Made+In+Cookware" class="product-cta">Call for Pricing</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CATALOG CTA FOOTER -->
+  <div class="cta-band">
+    <div class="cta-band-content">
+      <h2>Don't See What You're<br><span style="color:var(--ember);">Looking For?</span></h2>
+      <p>We carry a wider selection in store and are always bringing in new products. Give Michael a call or stop by the showroom.</p>
+      <div class="cta-band-actions">
+        <a href="tel:8175506038" class="btn-primary">Call 817-550-6038</a>
+        <a href="brands.html" class="btn-ghost">View All Brands</a>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end page-top -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <img src="assets/logo.png" alt="Outdoor Grill Sales">
+      <p>Premium grills, outdoor kitchens, and expert service in Weatherford, Texas. Family-owned since 2017.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/outdoorgrillsales" target="_blank" rel="noopener" title="Facebook">f</a>
+        <a href="https://www.instagram.com/outdoorgrillsales1" target="_blank" rel="noopener" title="Instagram">in</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="catalog.html">Shop Catalog</a></li>
+        <li><a href="brands.html">Our Brands</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="services.html">Grill Repair</a></li>
+        <li><a href="services.html#install">Outdoor Kitchens</a></li>
+        <li><a href="services.html#install">Professional Install</a></li>
+        <li><a href="contact.html">Book Appointment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Visit Us</h4>
+      <div class="footer-contact-item">
+        220 York Ave<br>Weatherford, TX 76086<br>
+        <span style="font-size:0.75rem; color:var(--ember);">(Relocating soon)</span>
+      </div>
+      <div class="footer-contact-item"><a href="tel:8175506038">817-550-6038</a></div>
+      <div class="footer-contact-item"><a href="mailto:michael@outdoorgrillsales.com">michael@outdoorgrillsales.com</a></div>
+      <div class="footer-contact-item" style="margin-top:0.5rem; font-size:0.8rem; line-height:1.8; color:var(--text-dim);">
+        Wed &amp; Thu: 10am - 5pm<br>Sat: 10am - 4pm<br>Mon &amp; Tue: By Appointment
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">&copy; 2025 Outdoor Grill Sales &nbsp;|&nbsp; Michael &amp; Sandee Densmore &nbsp;|&nbsp; Weatherford, TX</div>
+    <div class="footer-bottom-links">
+      <a href="contact.html">Contact</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</footer>
+
+<button id="back-top" aria-label="Back to top">&#8593;</button>
+
+<script src="nav.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
