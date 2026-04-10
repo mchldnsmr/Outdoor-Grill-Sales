@@ -2127,3 +2127,223 @@ footer {
   .hero-stat-num { font-size: 1.6rem; }
   .hero-stat-label { font-size: 0.5rem; }
 }
+
+/* ============================================================
+   PATCH 1 — Fixed background hero (PC + Mobile)
+   The hero-bg pseudo-element stays fixed on desktop.
+   On mobile, background-attachment:fixed is disabled by iOS/Android
+   so we use a fixed pseudo-element on the body instead.
+   ============================================================ */
+
+/* Global fixed background — sits behind everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('assets/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Remove the old .hero-bg div approach — keep overlay only */
+.hero-bg {
+  display: none;
+}
+
+/* ============================================================
+   PATCH 2 — Transparent section backgrounds
+   All solid-black section/card backgrounds become semi-transparent
+   so the hero image bleeds through subtly on every page.
+   ============================================================ */
+body {
+  background: transparent;
+}
+
+.marquee-strip,
+.brand-strip-section,
+.reviews-section,
+.services-section,
+.process-section,
+.contact-section,
+.about-preview-content,
+.service-block-content,
+.about-story-content,
+.contact-info-panel,
+.contact-form-panel,
+.catalog-filter,
+.catalog-category,
+.page-hero,
+.footer-top,
+footer {
+  background: rgba(17, 17, 16, 0.82) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Service pillars */
+.service-pillar {
+  background: rgba(26, 25, 24, 0.80) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.service-pillar:hover {
+  background: rgba(34, 33, 32, 0.88) !important;
+}
+
+/* Product cards */
+.product-card {
+  background: rgba(26, 25, 24, 0.82) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.product-card:hover {
+  background: rgba(34, 33, 32, 0.90) !important;
+}
+
+/* Review cards */
+.review-card {
+  background: rgba(34, 33, 32, 0.80) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.review-card:hover {
+  background: rgba(44, 43, 41, 0.88) !important;
+}
+
+/* Brand cards */
+.brand-card {
+  background: rgba(26, 25, 24, 0.82) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.brand-card:hover {
+  background: rgba(34, 33, 32, 0.90) !important;
+}
+
+/* About value blocks */
+.about-value {
+  background: rgba(26, 25, 24, 0.82) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.about-value:hover {
+  background: rgba(34, 33, 32, 0.90) !important;
+}
+
+/* Form fields */
+.form-field {
+  background: rgba(44, 43, 41, 0.85) !important;
+}
+.form-field:focus-within {
+  background: rgba(58, 56, 53, 0.90) !important;
+}
+.form-submit-row {
+  background: rgba(44, 43, 41, 0.88) !important;
+}
+
+/* Footer bottom strip */
+.footer-bottom {
+  background: rgba(12, 12, 11, 0.90) !important;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Nav already has backdrop-filter, just ensure transparency */
+nav {
+  background: rgba(17, 17, 16, 0.92) !important;
+}
+
+/* CTA band overlay — keep text readable */
+.cta-band::before {
+  background: rgba(17, 17, 16, 0.78) !important;
+}
+
+/* Hours grid rows */
+.hours-row {
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+
+/* ============================================================
+   PATCH 3 — Announcement banner no longer reveals background
+   The nav top offset was being undone on scroll.
+   Lock the page-top offset to account for banner + nav.
+   ============================================================ */
+.page-top {
+  padding-top: 108px !important;
+}
+
+/* When banner is hidden, pages fall back to nav height only */
+body.no-banner .page-top {
+  padding-top: 72px !important;
+}
+
+/* ============================================================
+   PATCH 4 — About page store-front image fix
+   Less zoom, better proportions on both PC and mobile.
+   ============================================================ */
+.store-front-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  height: 340px;           /* controlled height, not too tall */
+  margin: 0 4rem;
+}
+
+.store-front-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;  /* shows more of the building, less sky */
+  display: block;
+}
+
+.store-front-wrap .store-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 2rem;
+}
+
+@media (max-width: 900px) {
+  .store-front-wrap {
+    height: 220px;
+    margin: 0 1.5rem;
+  }
+}
+
+/* ============================================================
+   PATCH 5 — Brand logos always full color (no grayscale)
+   ============================================================ */
+.brand-card-logo {
+  filter: none !important;
+}
+.brand-card:hover .brand-card-logo {
+  filter: none !important;
+}
+
+/* Also fix the brand trust strip on homepage */
+.brand-strip-item {
+  opacity: 0.8 !important;
+  filter: none !important;
+}
+.brand-strip-item:hover {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* ============================================================
+   PATCH 6 — Mobile background fix (iOS/Android)
+   body::before handles this globally now
+   ============================================================ */
+@media (max-width: 900px) {
+  .hero-bg,
+  .cta-band {
+    background-attachment: scroll !important;
+  }
+
+  .store-front-wrap {
+    height: 200px;
+    margin: 0 1.5rem;
+  }
+}
