@@ -3019,3 +3019,156 @@ section,
     height: 180px;
   }
 }
+
+/* ============================================================
+   PATCH 8 — White box fix, service section transparency,
+              store front image, hero section separation
+   ============================================================ */
+
+/* ── 1. WHITE BOXES ON EXPLORE CARDS ──
+   The brand logos have white backgrounds from the original PNG files.
+   We hide the rectangular white background by using mix-blend-mode
+   so only the logo artwork shows, not the white rectangle around it.
+   Also adds a dark pill behind the logo for legibility on light images. */
+
+.explore-brand-logo {
+  mix-blend-mode: screen !important;
+  background: transparent !important;
+}
+
+/* Dark pill behind logo so it reads on any image color */
+.explore-brand-img-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0.7rem;
+  left: 0.85rem;
+  height: 46px;
+  width: 160px;
+  background: rgba(0, 0, 0, 0.55);
+  border-radius: 3px;
+  z-index: 1;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Logo stays above the pill */
+.explore-brand-logo {
+  z-index: 3 !important;
+}
+
+/* No-image state — no pill needed, logo shows in color */
+.explore-brand-img-wrap.no-img::after {
+  display: none;
+}
+
+.explore-brand-img-wrap.no-img .explore-brand-logo {
+  mix-blend-mode: normal !important;
+  filter: none !important;
+  opacity: 0.85;
+}
+
+/* ── 2. SERVICE "YOU CAN COUNT ON" SECTION TRANSPARENCY ──
+   The 4-box grid in services.html needs transparency like everything else. */
+
+.about-value,
+[style*="grid-template-columns:repeat(auto-fit"] .about-value,
+.services-section .about-value {
+  background: rgba(26, 25, 24, 0.80) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+}
+
+.about-value:hover {
+  background: rgba(34, 33, 32, 0.90) !important;
+}
+
+/* Target the inline-styled grid in services.html directly */
+.service-count-grid {
+  background: transparent !important;
+}
+
+/* ── 3. STORE FRONT IMAGE — complete rewrite ──
+   Let the image breathe. Remove all height constraints
+   and let it display at its natural aspect ratio
+   so nothing gets cropped or zoomed. */
+
+.store-front-wrap {
+  position: relative !important;
+  overflow: hidden !important;
+  border: 1px solid var(--border) !important;
+  margin: 0 4rem !important;
+  height: auto !important;
+  max-height: none !important;
+  background: var(--charcoal-3);
+}
+
+.store-front-wrap img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: fill !important;
+  object-position: unset !important;
+  display: block !important;
+}
+
+.store-front-wrap .store-badge {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.5rem;
+  z-index: 2;
+}
+
+@media (max-width: 900px) {
+  .store-front-wrap {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+
+  .store-front-wrap img {
+    width: 100% !important;
+    height: auto !important;
+    object-fit: fill !important;
+  }
+}
+
+/* ── 4. HERO SECTION SEPARATION ──
+   The page-hero on inner pages uses hero-bg.jpg as a faint overlay.
+   We change it to use the store-front image instead so it feels
+   different from the main background. If store-front image is not
+   saved yet it falls back to a dark charcoal. */
+
+.page-hero::before {
+  background-image: url('assets/store-front.jpg') !important;
+  background-size: cover !important;
+  background-position: center 35% !important;
+  opacity: 0.12 !important;
+}
+
+/* ── 5. INLINE SECTION GRIDS — transparency fix for services page ──
+   Any inline grid container that wraps about-value cards needs
+   a transparent background rather than the default solid charcoal. */
+[style*="display:grid"][style*="background:var(--border)"],
+[style*="display:grid"][style*="background: var(--border)"] {
+  background: rgba(255,255,255,0.06) !important;
+}
+
+
+/* Store front overlay - separate from the img so image shows fully */
+.store-front-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 60%,
+    rgba(17,17,16,0.65) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+.store-badge {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.5rem;
+  z-index: 2;
+}
