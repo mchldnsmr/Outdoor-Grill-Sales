@@ -132,7 +132,7 @@ function initReviewsCarousel() {
     track.style.transform = `translateX(-${current * 100}%)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     clearInterval(autoTimer);
-    autoTimer = setInterval(next, 5500);
+    autoTimer = setInterval(next, 3500);
   }
 
   function next() { goTo(current + 1); }
