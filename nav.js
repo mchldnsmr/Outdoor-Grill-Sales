@@ -77,6 +77,8 @@ function initHamburger() {
 function initActiveNav() {
   const currentPage = window.location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav-links a, .nav-drawer a').forEach(link => {
+    // Never mark the CTA button as active — it should always stay orange
+    if (link.classList.contains('nav-cta') || link.classList.contains('drawer-cta')) return;
     const href = link.getAttribute('href');
     if (!href) return;
     const linkPage = href.split('/').pop();
