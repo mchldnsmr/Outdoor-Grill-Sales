@@ -94,6 +94,13 @@ function initActiveNav() {
 function initReveal() {
   const reveals = document.querySelectorAll('.reveal');
   if (!reveals.length) return;
+
+  // Use a lower threshold on mobile so the animation triggers
+  // before the element is fully on screen — prevents snap-in effect
+  const isMobile = window.innerWidth <= 900;
+  const threshold = isMobile ? 0.01 : 0.1;
+  const rootMargin = isMobile ? '0px 0px -20px 0px' : '0px 0px -40px 0px';
+
   const io = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -101,7 +108,8 @@ function initReveal() {
         io.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: threshold, rootMargin: rootMargin });
+
   reveals.forEach(el => io.observe(el));
 }
 
@@ -125,14 +133,14 @@ function initReviewsCarousel() {
   const cards = track.querySelectorAll('.review-card');
   const total = cards.length;
   let current = 0;
-  let autoTimer = setInterval(next, 3500);
+  let autoTimer = setInterval(next, 5500);
 
   function goTo(n) {
     current = (n + total) % total;
     track.style.transform = `translateX(-${current * 100}%)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     clearInterval(autoTimer);
-    autoTimer = setInterval(next, 3500);
+    autoTimer = setInterval(next, 5500);
   }
 
   function next() { goTo(current + 1); }
