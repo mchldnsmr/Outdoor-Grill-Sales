@@ -1,7 +1,7 @@
 /* ============================================================
    OUTDOOR GRILL SALES — style.css
-   Warm, premium, Texas outdoor living aesthetic
-   Fonts: Bebas Neue (headlines) + Crimson Pro (body)
+   Light theme. Warm, premium, Texas outdoor living.
+   Fonts: Bebas Neue (headlines) + Crimson Pro (body) + DM Sans (UI)
    ============================================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap');
@@ -16,58 +16,54 @@
   --ember-glow:   rgba(212, 84, 30, 0.10);
   --gold:         #B07818;
   --gold-light:   #C88C28;
-  --charcoal:     #F5F2EE;
-  --charcoal-2:   #EDEAE6;
-  --charcoal-3:   #E4E0DB;
-  --charcoal-4:   #D8D3CC;
+  --bg:           #F5F2EE;
+  --bg-2:         #EDEAE6;
+  --bg-3:         #E4E0DB;
+  --bg-4:         #D8D3CC;
   --smoke:        #C8C2BA;
   --border:       rgba(0, 0, 0, 0.08);
-  --border-warm:  rgba(180, 100, 20, 0.2);
+  --border-warm:  rgba(180, 100, 20, 0.20);
   --text:         #1A1715;
   --text-muted:   #4A4540;
   --text-dim:     #807870;
-  --white:        #FFFFFF;
+  --card:         rgba(255, 255, 255, 0.78);
+  --card-hover:   rgba(255, 255, 255, 0.97);
 }
 
 /* ─────────────────────────────────────────────
    RESET & BASE
    ───────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
   font-family: 'DM Sans', sans-serif;
-  background: var(--charcoal);
+  background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-img {
-  max-width: 100%;
-  display: block;
+/* Fixed background image — hero image bleeds through all sections faintly */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url('assets/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.48;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-ul {
-  list-style: none;
-}
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
 
 /* ─────────────────────────────────────────────
-   SCROLL PROGRESS BAR
+   PROGRESS BAR
    ───────────────────────────────────────────── */
 #progress-bar {
   position: fixed;
@@ -80,26 +76,9 @@ ul {
 }
 
 /* ─────────────────────────────────────────────
-   ANNOUNCEMENT BANNER (relocation notice)
+   ANNOUNCEMENT BANNER (hidden — toggle when needed)
    ───────────────────────────────────────────── */
-#announce-banner {
-  background: var(--ember);
-  color: #fff;
-  text-align: center;
-  padding: 0.55rem 2rem;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 500;
-  position: relative;
-  z-index: 200;
-}
-
-#announce-banner a {
-  color: #fff;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
+#announce-banner { display: none !important; }
 
 /* ─────────────────────────────────────────────
    NAVIGATION
@@ -113,21 +92,16 @@ nav {
   justify-content: space-between;
   padding: 0 3rem;
   height: 72px;
-  background: rgba(17, 17, 16, 0.95);
+  background: rgba(245, 242, 238, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(0,0,0,0.10);
   transition: height 0.3s, background 0.3s;
 }
 
 nav.scrolled {
   height: 60px;
-  background: rgba(17, 17, 16, 0.98);
-}
-
-/* Offset for announcement banner */
-nav.has-banner {
-  top: 36px;
+  background: rgba(245, 242, 238, 0.99);
 }
 
 .nav-logo img {
@@ -136,9 +110,7 @@ nav.has-banner {
   transition: height 0.3s;
 }
 
-nav.scrolled .nav-logo img {
-  height: 42px;
-}
+nav.scrolled .nav-logo img { height: 42px; }
 
 .nav-links {
   display: flex;
@@ -158,18 +130,11 @@ nav.scrolled .nav-logo img {
   white-space: nowrap;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--text);
-  background: rgba(255,255,255,0.06);
-}
-
-.nav-links a.active {
-  color: var(--ember);
-}
+.nav-links a:hover { color: var(--ember); background: rgba(0,0,0,0.04); }
+.nav-links a.active { color: var(--ember); }
 
 .nav-cta {
-  background: var(--ember);
+  background: var(--ember) !important;
   color: #fff !important;
   padding: 0.6rem 1.4rem !important;
   border-radius: 2px;
@@ -180,11 +145,8 @@ nav.scrolled .nav-logo img {
   margin-left: 0.5rem;
 }
 
-.nav-cta:hover {
-  background: var(--ember-light) !important;
-  transform: translateY(-1px);
-  color: #fff !important;
-}
+.nav-cta:hover { background: var(--ember-light) !important; transform: translateY(-1px); }
+.nav-cta.active { background: var(--ember) !important; color: #fff !important; }
 
 /* HAMBURGER */
 .nav-hamburger {
@@ -208,40 +170,30 @@ nav.scrolled .nav-logo img {
   transform-origin: center;
 }
 
-.nav-hamburger.open span:nth-child(1) {
-  transform: translateY(7px) rotate(45deg);
-}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.nav-hamburger.open span:nth-child(2) {
-  opacity: 0;
-  width: 0;
-}
-
-.nav-hamburger.open span:nth-child(3) {
-  transform: translateY(-7px) rotate(-45deg);
-}
-
-/* MOBILE MENU DRAWER */
+/* MOBILE DRAWER */
 .nav-drawer {
   display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: var(--charcoal-2);
+  background: rgba(245, 242, 238, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 99;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
   overflow-y: auto;
+  border-left: 3px solid var(--ember);
 }
 
-.nav-drawer.open {
-  opacity: 1;
-  pointer-events: auto;
-}
+.nav-drawer.open { opacity: 1; pointer-events: auto; }
 
 .nav-drawer a {
   font-family: 'Bebas Neue', sans-serif;
@@ -255,15 +207,8 @@ nav.scrolled .nav-logo img {
   transition: color 0.2s, background 0.2s;
 }
 
-.nav-drawer a:first-child {
-  border-top: 1px solid var(--border);
-}
-
-.nav-drawer a:hover,
-.nav-drawer a.active {
-  color: var(--ember);
-  background: rgba(232, 98, 42, 0.06);
-}
+.nav-drawer a:first-child { border-top: 1px solid var(--border); }
+.nav-drawer a:hover, .nav-drawer a.active { color: var(--ember); background: rgba(212,84,30,0.05); }
 
 .nav-drawer .drawer-cta {
   margin-top: 1.5rem;
@@ -271,39 +216,27 @@ nav.scrolled .nav-logo img {
   color: #fff;
   border-radius: 2px;
   font-size: 1.4rem;
-  letter-spacing: 0.1em;
   border-bottom: none;
   padding: 0.8rem 3rem;
   width: auto;
 }
 
 .nav-drawer .drawer-contact {
-  margin-top: 1rem;
   font-family: 'DM Sans', sans-serif;
   font-size: 0.85rem;
   color: var(--text-dim);
-  letter-spacing: 0.05em;
   border: none;
   padding: 0.5rem 2rem;
+  margin-top: 0.5rem;
 }
 
-/* ─────────────────────────────────────────────
-   PAGE OFFSET (accounts for fixed nav + banner)
-   ───────────────────────────────────────────── */
-.page-top {
-  padding-top: 108px; /* 36px banner + 72px nav */
-}
-
-.page-top-no-banner {
-  padding-top: 72px;
-}
+/* PAGE TOP OFFSET */
+.page-top { padding-top: 72px; }
 
 /* ─────────────────────────────────────────────
    SHARED SECTION STYLES
    ───────────────────────────────────────────── */
-section {
-  padding: 6rem 4rem;
-}
+section { padding: 4.5rem 2.6rem; }
 
 .section-label {
   display: inline-flex;
@@ -331,11 +264,10 @@ section {
   line-height: 0.93;
   letter-spacing: 0.02em;
   margin-bottom: 1.2rem;
+  color: var(--text);
 }
 
-.section-title span {
-  color: var(--ember);
-}
+.section-title span { color: var(--ember); }
 
 .section-subtitle {
   font-family: 'Crimson Pro', serif;
@@ -368,42 +300,34 @@ section {
   text-decoration: none;
 }
 
-.btn-primary:hover {
-  background: var(--ember-light);
-  transform: translateY(-2px);
-  color: #fff;
-}
+.btn-primary:hover { background: var(--ember-light); transform: translateY(-2px); color: #fff; }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: transparent;
-  color: var(--text-muted);
+  background: rgba(245,242,238,0.92);
+  color: var(--text);
   padding: 0.85rem 2rem;
   border-radius: 2px;
   font-size: 0.8rem;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(0,0,0,0.22);
   cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, transform 0.15s;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
   text-decoration: none;
 }
 
-.btn-ghost:hover {
-  color: var(--text);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-2px);
-}
+.btn-ghost:hover { background: #fff; color: var(--text); border-color: rgba(0,0,0,0.40); transform: translateY(-2px); }
 
 .btn-gold {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   background: var(--gold);
-  color: var(--charcoal);
+  color: #fff;
   padding: 0.85rem 2rem;
   border-radius: 2px;
   font-size: 0.8rem;
@@ -416,20 +340,58 @@ section {
   text-decoration: none;
 }
 
-.btn-gold:hover {
-  background: var(--gold-light);
-  transform: translateY(-2px);
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+.btn-catalog {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--ember);
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
 }
+
+.btn-catalog:hover { background: var(--ember-light); transform: translateY(-1px); color: #fff; }
+
+.btn-catalog-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.6rem 1.2rem;
+  border-radius: 2px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, transform 0.15s;
+  text-decoration: none;
+}
+
+.btn-catalog-ghost:hover { color: var(--text); border-color: rgba(0,0,0,0.25); transform: translateY(-1px); }
 
 /* ─────────────────────────────────────────────
    MARQUEE STRIP
    ───────────────────────────────────────────── */
 .marquee-strip {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  border-top: 2px solid var(--ember);
+  border-bottom: 2px solid var(--ember);
   overflow: hidden;
   padding: 0.95rem 0;
-  background: var(--charcoal-2);
+  background: rgba(245, 242, 238, 0.88);
+  box-shadow: 0 2px 12px rgba(212,84,30,0.10);
 }
 
 .marquee-track {
@@ -446,23 +408,14 @@ section {
   font-size: 0.7rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text);
   white-space: nowrap;
   font-weight: 500;
 }
 
-.marquee-dot {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: var(--ember);
-  flex-shrink: 0;
-}
+.marquee-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ember); flex-shrink: 0; }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
 /* ─────────────────────────────────────────────
    HERO (index.html)
@@ -473,7 +426,7 @@ section {
   min-height: 100dvh;
   display: flex;
   align-items: center;
-  padding: 8rem 4rem 5rem;
+  padding: 8rem 2.6rem 5rem;
   overflow: hidden;
 }
 
@@ -492,9 +445,10 @@ section {
   inset: 0;
   background: linear-gradient(
     105deg,
-    rgba(17,17,16,0.92) 0%,
-    rgba(17,17,16,0.75) 55%,
-    rgba(232,98,42,0.08) 100%
+    rgba(245,242,238,0.82) 0%,
+    rgba(245,242,238,0.52) 40%,
+    rgba(245,242,238,0.08) 70%,
+    rgba(212,84,30,0.01) 100%
   );
   z-index: 1;
 }
@@ -517,13 +471,7 @@ section {
   font-weight: 500;
 }
 
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 36px;
-  height: 1px;
-  background: var(--gold);
-}
+.hero-eyebrow::before { content: ''; display: block; width: 36px; height: 1px; background: var(--gold); }
 
 .hero-title {
   font-family: 'Bebas Neue', sans-serif;
@@ -531,16 +479,16 @@ section {
   line-height: 0.88;
   letter-spacing: 0.01em;
   margin-bottom: 1.8rem;
+  color: var(--text);
 }
 
 .hero-title .outline {
-  -webkit-text-stroke: 2px rgba(245, 240, 232, 0.35);
-  color: transparent;
+  -webkit-text-stroke: 3px #1A1715;
+  color: var(--ember);
+  paint-order: stroke fill;
 }
 
-.hero-title .ember {
-  color: var(--ember);
-}
+.hero-title .ember { color: var(--ember); }
 
 .hero-sub {
   font-family: 'Crimson Pro', serif;
@@ -553,24 +501,13 @@ section {
   font-style: italic;
 }
 
-.hero-actions {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-bottom: 3.5rem;
-}
+.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; margin-bottom: 3.5rem; }
 
-.hero-stats {
-  display: flex;
-  gap: 0;
-  border: 1px solid var(--border-warm);
-  width: fit-content;
-}
+.hero-stats { display: flex; border: 1px solid var(--border-warm); width: fit-content; }
 
 .hero-stat {
   padding: 1.2rem 2.2rem;
-  background: rgba(232,98,42,0.07);
+  background: rgba(255,255,255,0.78);
   border-right: 1px solid var(--border-warm);
   text-align: center;
   position: relative;
@@ -584,28 +521,10 @@ section {
   background: linear-gradient(90deg, var(--ember), var(--gold));
 }
 
-.hero-stat:last-child {
-  border-right: none;
-}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; line-height: 1; color: var(--text); letter-spacing: 0.02em; }
+.hero-stat-label { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ember); margin-top: 0.4rem; font-weight: 500; }
 
-.hero-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.2rem;
-  line-height: 1;
-  color: var(--text);
-  letter-spacing: 0.02em;
-}
-
-.hero-stat-label {
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-top: 0.3rem;
-  font-weight: 500;
-}
-
-/* Floating scroll cue */
 .hero-scroll {
   position: absolute;
   bottom: 2.5rem;
@@ -623,21 +542,15 @@ section {
   animation: float 2.5s ease-in-out infinite;
 }
 
-.hero-scroll::after {
-  content: '';
-  display: block;
-  width: 1px;
-  height: 40px;
-  background: linear-gradient(to bottom, var(--ember), transparent);
-}
+.hero-scroll::after { content: ''; display: block; width: 1px; height: 40px; background: linear-gradient(to bottom, var(--ember), transparent); }
 
 @keyframes float {
   0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%       { transform: translateX(-50%) translateY(6px); }
+  50% { transform: translateX(-50%) translateY(6px); }
 }
 
 /* ─────────────────────────────────────────────
-   SERVICES STRIP (3 pillars on homepage)
+   SERVICE PILLARS (homepage 3-column)
    ───────────────────────────────────────────── */
 .services-strip {
   display: grid;
@@ -645,18 +558,19 @@ section {
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
-  margin: 0 4rem;
+  margin: 0 2.6rem;
 }
 
 .service-pillar {
-  background: var(--charcoal-2);
+  background: rgba(255,255,255,0.78);
   padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  transition: background 0.25s;
+  transition: background 0.25s, box-shadow 0.25s;
   position: relative;
   overflow: hidden;
+  border-left: 3px solid transparent;
 }
 
 .service-pillar::before {
@@ -671,12 +585,11 @@ section {
 }
 
 .service-pillar:hover {
-  background: var(--charcoal-3);
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
 }
 
-.service-pillar:hover::before {
-  transform: scaleX(1);
-}
+.service-pillar:hover::before { transform: scaleX(1); }
 
 .service-icon {
   width: 48px;
@@ -688,31 +601,9 @@ section {
   justify-content: center;
 }
 
-.service-icon svg {
-  width: 22px;
-  height: 22px;
-  stroke: var(--ember);
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
-
-.service-pillar h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-
-.service-pillar p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  font-weight: 300;
-  flex: 1;
-}
+.service-icon svg { width: 22px; height: 22px; stroke: var(--ember); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.service-pillar h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; line-height: 1; color: var(--text); }
+.service-pillar p { font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--text-muted); line-height: 1.65; font-weight: 300; flex: 1; }
 
 .service-pillar a {
   display: inline-flex;
@@ -727,61 +618,93 @@ section {
   margin-top: 0.5rem;
 }
 
-.service-pillar a:hover {
-  gap: 0.7rem;
-}
-
-.service-pillar a svg {
-  width: 12px;
-  height: 12px;
-  stroke: var(--ember);
-  stroke-width: 2;
-}
+.service-pillar a:hover { gap: 0.7rem; }
+.service-pillar a svg { width: 12px; height: 12px; stroke: var(--ember); stroke-width: 2; }
 
 /* ─────────────────────────────────────────────
-   BRAND TRUST STRIP
+   BRAND WALL
    ───────────────────────────────────────────── */
-.brand-strip-section {
-  padding: 4rem;
-  background: var(--charcoal-2);
+.brand-wall-section {
+  padding: 2.5rem 2.6rem;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
+  background: rgba(237,234,230,0.02);
+  position: relative;
 }
 
-.brand-strip-label {
-  text-align: center;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 2.5rem;
-  font-weight: 500;
+.brand-wall-section::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, var(--ember) 20%, var(--gold) 50%, var(--ember) 80%, transparent 100%);
+  margin-bottom: 2rem;
+  opacity: 0.5;
 }
 
-.brand-strip-grid {
+.brand-wall-header {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   align-items: center;
-  gap: 1.5rem 3rem;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }
 
-.brand-strip-item {
-  opacity: 0.45;
-  transition: opacity 0.3s;
-  filter: grayscale(100%) brightness(1.8);
+.brand-wall-link { font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ember); font-weight: 500; transition: opacity 0.2s; }
+.brand-wall-link:hover { opacity: 0.7; }
+
+.brand-wall-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border-warm);
 }
 
-.brand-strip-item:hover {
-  opacity: 1;
-  filter: grayscale(0%);
+.brand-wall-tile {
+  background: rgba(255,255,255,0.78);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.4rem 1.6rem;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.25s;
+  text-decoration: none;
+  min-height: 80px;
 }
 
-.brand-strip-item img {
-  height: 32px;
+.brand-wall-tile::before { content: ''; position: absolute; inset: 0; background: var(--ember-glow); opacity: 0; transition: opacity 0.3s; }
+.brand-wall-tile:hover { background: rgba(255,255,255,0.92); }
+.brand-wall-tile:hover::before { opacity: 0.6; }
+
+.brand-wall-tile::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--ember);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.35s ease;
+}
+
+.brand-wall-tile:hover::after { transform: scaleX(1); }
+
+.brand-wall-tile img {
+  height: 28px;
   width: auto;
+  max-width: 120px;
   object-fit: contain;
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: grayscale(20%);
 }
+
+.brand-wall-tile:hover img { transform: scale(1.06); filter: grayscale(0%); }
 
 /* ─────────────────────────────────────────────
    ABOUT PREVIEW (homepage)
@@ -792,26 +715,12 @@ section {
   gap: 0;
   background: var(--border);
   border: 1px solid var(--border);
-  margin: 0 4rem;
+  margin: 0 2.6rem;
 }
 
-.about-preview-img {
-  position: relative;
-  overflow: hidden;
-  min-height: 480px;
-}
-
-.about-preview-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  transition: transform 0.6s ease;
-}
-
-.about-preview:hover .about-preview-img img {
-  transform: scale(1.03);
-}
+.about-preview-img { position: relative; overflow: hidden; min-height: 480px; }
+.about-preview-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform 0.6s ease; }
+.about-preview:hover .about-preview-img img { transform: scale(1.03); }
 
 .about-preview-badge {
   position: absolute;
@@ -827,7 +736,7 @@ section {
 }
 
 .about-preview-content {
-  background: var(--charcoal-2);
+  background: rgba(237,234,230,0.78);
   padding: 3.5rem;
   display: flex;
   flex-direction: column;
@@ -846,20 +755,12 @@ section {
   border-left: 2px solid var(--ember);
 }
 
-.about-preview-content p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  font-weight: 300;
-}
+.about-preview-content p { font-family: 'Crimson Pro', serif; font-size: 1.05rem; line-height: 1.7; color: var(--text-muted); font-weight: 300; }
 
 /* ─────────────────────────────────────────────
-   GOOGLE REVIEWS SECTION
+   REVIEWS CAROUSEL
    ───────────────────────────────────────────── */
-.reviews-section {
-  background: var(--charcoal-2);
-}
+.reviews-section { background: rgba(237,234,230,0.02); }
 
 .reviews-header {
   display: flex;
@@ -870,110 +771,88 @@ section {
   gap: 1rem;
 }
 
-.reviews-score {
+.reviews-score { display: flex; align-items: center; gap: 1.5rem; }
+.reviews-big-num { font-family: 'Bebas Neue', sans-serif; font-size: 5rem; line-height: 1; color: var(--gold); }
+.reviews-stars { color: var(--gold); font-size: 1.4rem; letter-spacing: 0.08em; margin-bottom: 0.3rem; }
+.reviews-count { font-size: 0.8rem; color: var(--text-dim); letter-spacing: 0.06em; }
+
+.reviews-carousel-wrap {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--ember);
+  border-radius: 2px;
+  margin-top: 3rem;
+  box-shadow: 0 4px 24px rgba(212,84,30,0.15);
+}
+
+.reviews-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); }
+
+.reviews-carousel-track .review-card {
+  min-width: 100%;
+  box-sizing: border-box;
+  padding: 2.5rem 3rem;
+  background: rgba(255,255,255,0.95);
+  border: none;
+}
+
+.reviews-carousel-controls {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: space-between;
+  padding: 1.2rem 1.5rem;
+  border-top: 1px solid rgba(212,84,30,0.20);
+  background: rgba(245,242,238,0.97);
 }
 
-.reviews-big-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 5rem;
-  line-height: 1;
-  color: var(--gold);
+.reviews-carousel-dots { display: flex; gap: 0.5rem; align-items: center; }
+
+.reviews-carousel-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--smoke);
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s, transform 0.25s;
+  padding: 0;
 }
 
-.reviews-stars {
-  color: var(--gold);
-  font-size: 1.4rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.3rem;
-}
+.reviews-carousel-dot.active { background: var(--ember); transform: scale(1.4); }
 
-.reviews-count {
-  font-size: 0.8rem;
-  color: var(--text-dim);
-  letter-spacing: 0.06em;
-}
+.reviews-carousel-btns { display: flex; gap: 0.5rem; }
 
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-.review-card {
-  background: var(--charcoal-3);
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  transition: background 0.25s;
-}
-
-.review-card:hover {
-  background: var(--charcoal-4);
-}
-
-.review-stars {
-  color: var(--gold);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-}
-
-.review-card blockquote {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1rem;
-  line-height: 1.7;
-  color: var(--text-muted);
-  font-style: italic;
-  font-weight: 300;
-  flex: 1;
-}
-
-.review-author {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.review-avatar {
+.reviews-carousel-btn {
   width: 36px;
   height: 36px;
-  border-radius: 50%;
-  background: var(--ember-glow);
-  border: 1px solid var(--border-warm);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text-muted);
+  border-radius: 2px;
+  font-size: 1rem;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 500;
-  color: var(--ember);
-  flex-shrink: 0;
-  letter-spacing: 0.05em;
+  transition: border-color 0.2s, color 0.2s;
 }
 
-.review-name {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text);
-}
+.reviews-carousel-btn:hover { border-color: var(--ember); color: var(--ember); }
 
-.review-platform {
-  font-size: 0.68rem;
-  color: var(--text-dim);
-  margin-top: 0.1rem;
-  letter-spacing: 0.04em;
-}
+.review-card { background: rgba(255,255,255,0.78); display: flex; flex-direction: column; gap: 1rem; transition: background 0.25s; }
+.review-card:hover { background: rgba(255,255,255,0.72); }
+.review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em; }
+.review-card blockquote { font-family: 'Crimson Pro', serif; font-size: 1rem; line-height: 1.7; color: var(--text-muted); font-style: italic; font-weight: 300; flex: 1; border-left: 2px solid var(--ember); padding-left: 1rem; }
+.review-author { display: flex; align-items: center; gap: 0.75rem; }
+.review-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--ember-glow); border: 1px solid var(--border-warm); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 500; color: var(--ember); flex-shrink: 0; }
+.review-name { font-size: 0.82rem; font-weight: 500; color: var(--text); }
+.review-platform { font-size: 0.68rem; color: var(--text-dim); margin-top: 0.1rem; }
 
 /* ─────────────────────────────────────────────
    CTA BAND
    ───────────────────────────────────────────── */
 .cta-band {
   position: relative;
-  padding: 5rem 4rem;
+  padding: 3.25rem 2.6rem;
   background-image: url('assets/hero-bg.jpg');
   background-size: cover;
   background-position: center;
@@ -982,63 +861,40 @@ section {
   text-align: center;
 }
 
-.cta-band::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(17,17,16,0.82);
-}
-
-.cta-band-content {
-  position: relative;
-  z-index: 1;
-}
-
-.cta-band h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  margin-bottom: 1rem;
-  line-height: 0.95;
-}
-
-.cta-band p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1.2rem;
-  color: var(--text-muted);
-  font-style: italic;
-  margin-bottom: 2rem;
-  font-weight: 300;
-}
-
-.cta-band-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+.cta-band::before { content: ''; position: absolute; inset: 0; background: rgba(26,23,21,0.82); }
+.cta-band-content { position: relative; z-index: 1; }
+.cta-band h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 5vw, 4.5rem); margin-bottom: 1rem; line-height: 0.95; color: #fff; }
+.cta-band p { font-family: 'Crimson Pro', serif; font-size: 1.2rem; color: rgba(255,255,255,0.75); font-style: italic; margin-bottom: 2rem; font-weight: 300; }
+.cta-band-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
 
 /* ─────────────────────────────────────────────
-   CATALOG PAGE
+   PAGE HERO (inner pages)
    ───────────────────────────────────────────── */
 .page-hero {
-  position: relative;
-  padding: 5rem 4rem 3.5rem;
-  background: var(--charcoal-2);
+  padding: 3.25rem 2.6rem 2.25rem;
+  background-image: url('assets/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   border-bottom: 1px solid var(--border);
-  overflow: hidden;
+  position: relative;
 }
 
 .page-hero::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('assets/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.08;
+  background: linear-gradient(
+    105deg,
+    rgba(245,242,238,0.82) 0%,
+    rgba(245,242,238,0.52) 40%,
+    rgba(245,242,238,0.08) 70%,
+    rgba(212,84,30,0.01) 100%
+  );
+  z-index: 0;
 }
 
-.page-hero-content {
+.page-hero > * {
   position: relative;
   z-index: 1;
 }
@@ -1048,200 +904,176 @@ section {
   font-size: clamp(3rem, 6vw, 5.5rem);
   line-height: 0.92;
   margin-bottom: 0.8rem;
+  color: var(--text);
 }
 
-.page-hero-title span {
-  color: var(--ember);
-}
+.page-hero-title span { color: var(--ember); }
+.page-hero-sub { font-family: 'Crimson Pro', serif; font-size: 1.15rem; color: var(--text-muted); font-style: italic; max-width: 560px; font-weight: 300; }
 
-.page-hero-sub {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1.15rem;
-  color: var(--text-muted);
-  font-style: italic;
-  max-width: 560px;
-  font-weight: 300;
-}
-
-/* CATEGORY FILTER TABS */
+/* ─────────────────────────────────────────────
+   CATALOG FILTER TABS
+   ───────────────────────────────────────────── */
 .catalog-filter {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 2rem 4rem;
-  background: var(--charcoal-2);
-  border-bottom: 1px solid var(--border);
+  gap: 0.6rem;
+  padding: 1.2rem 2.6rem;
+  background: rgba(245,242,238,0.92);
+  border-bottom: 2px solid var(--ember);
+  border-top: 1px solid rgba(212,84,30,0.15);
   position: sticky;
   top: 60px;
   z-index: 50;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
 
 .filter-btn {
-  background: transparent;
-  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.85);
+  border: 1px solid rgba(0,0,0,0.14);
   color: var(--text-muted);
-  padding: 0.45rem 1rem;
-  border-radius: 2px;
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.22s ease;
   font-family: 'DM Sans', sans-serif;
   font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
 }
 
-.filter-btn:hover,
+.filter-btn:hover {
+  background: rgba(212,84,30,0.08);
+  border-color: var(--ember);
+  color: var(--ember);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(212,84,30,0.15);
+}
+
 .filter-btn.active {
   background: var(--ember);
   border-color: var(--ember);
   color: #fff;
+  box-shadow: 0 3px 12px rgba(212,84,30,0.35);
+  transform: translateY(-1px);
 }
 
-/* CATEGORY SECTION */
-.catalog-category {
-  padding: 4rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.catalog-category-header {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
-  flex-wrap: wrap;
-  gap: 1rem;
-}
-
-.category-title {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2.8rem;
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-}
-
-.category-count {
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  font-weight: 500;
-}
-
-/* PRODUCT GRID */
-.product-grid {
+/* ─────────────────────────────────────────────
+   EXPLORE BRANDS GRID
+   ───────────────────────────────────────────── */
+.explore-brands-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
 }
 
-.product-card {
-  background: var(--charcoal-2);
+.explore-brand-card {
+  background: rgba(255,255,255,0.78);
   display: flex;
   flex-direction: column;
-  transition: background 0.25s;
-  position: relative;
+  transition: background 0.25s, box-shadow 0.25s;
   overflow: hidden;
+  position: relative;
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
 
-.product-card::before {
+.explore-brand-card:hover {
+  background: rgba(255,255,255,0.78);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.10);
+}
+
+.explore-brand-card::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--ember);
+  height: 3px;
+  background: linear-gradient(90deg, var(--ember), var(--gold));
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.35s ease;
+  transition: transform 0.4s ease;
+  z-index: 10;
+}
+
+.explore-brand-card:hover::before { transform: scaleX(1); }
+
+.explore-brand-img-wrap {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  background: rgba(228,224,218,0.52);
+  flex-shrink: 0;
+}
+
+.explore-brand-img-wrap img:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.explore-brand-card:hover .explore-brand-img-wrap img:first-child { transform: scale(1.05); }
+
+.explore-brand-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(245,242,238,0.05) 0%, rgba(245,242,238,0.35) 70%, rgba(245,242,238,0.65) 100%);
   z-index: 1;
 }
 
-.product-card:hover {
-  background: var(--charcoal-3);
-}
+/* Logo on image — hidden, logos now in body */
+.explore-brand-logo { display: none; }
 
-.product-card:hover::before {
-  transform: scaleX(1);
-}
-
-.product-card-img {
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  padding: 1.5rem;
-  background: var(--charcoal-3);
-  transition: transform 0.4s ease;
-}
-
-.product-card:hover .product-card-img {
-  transform: scale(1.04);
-}
-
-.product-card-body {
-  padding: 1.2rem 1.5rem 1.5rem;
+.explore-brand-body {
+  padding: 1.6rem 1.8rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.85rem;
   flex: 1;
 }
 
-.product-brand {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
+/* Logo in body */
+.explore-body-logo {
+  display: block;
+  height: 36px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  object-position: left center;
+  margin-bottom: 0.2rem;
+  filter: none;
+  opacity: 1;
+  background: transparent;
+}
+
+.explore-brand-body h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.6rem; letter-spacing: 0.04em; line-height: 1; color: var(--text); }
+
+.explore-brand-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.explore-brand-tags span {
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ember);
+  border: 1px solid rgba(212,84,30,0.35);
+  padding: 0.18rem 0.55rem;
+  border-radius: 1px;
   font-weight: 500;
+  white-space: nowrap;
 }
 
-.product-name {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.4;
-  flex: 1;
-}
+.explore-brand-body p { font-family: 'Crimson Pro', serif; font-size: 0.98rem; color: var(--text-muted); line-height: 1.72; font-weight: 300; flex: 1; }
 
-.product-price {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  color: var(--gold);
-  letter-spacing: 0.04em;
-  margin-top: 0.3rem;
-}
-
-.product-cta {
-  margin-top: 0.8rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  background: transparent;
-  border: 1px solid var(--border-warm);
-  color: var(--gold);
-  padding: 0.55rem 1rem;
-  border-radius: 2px;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s, color 0.2s;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 500;
-  text-decoration: none;
-  width: 100%;
-}
-
-.product-cta:hover {
-  background: var(--ember);
-  border-color: var(--ember);
-  color: #fff;
-}
+.explore-brand-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.25rem; }
 
 /* ─────────────────────────────────────────────
-   SERVICES PAGE
+   SERVICE BLOCKS (services.html)
    ───────────────────────────────────────────── */
 .service-block {
   display: grid;
@@ -1249,168 +1081,48 @@ section {
   gap: 0;
   background: var(--border);
   border: 1px solid var(--border);
-  margin: 0 4rem 1px;
+  margin: 0 2.6rem 1px;
 }
 
-.service-block.reverse {
-  direction: rtl;
-}
+.service-block.reverse { direction: rtl; }
+.service-block.reverse > * { direction: ltr; }
 
-.service-block.reverse > * {
-  direction: ltr;
-}
-
-.service-block-img {
-  position: relative;
-  overflow: hidden;
-  min-height: 420px;
-}
-
-.service-block-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease;
-}
-
-.service-block:hover .service-block-img img {
-  transform: scale(1.04);
-}
+.service-block-img { position: relative; overflow: hidden; min-height: 420px; }
+.service-block-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+.service-block:hover .service-block-img img { transform: scale(1.04); }
 
 .service-block-content {
-  background: var(--charcoal-2);
-  padding: 3.5rem;
+  background: rgba(237,234,230,0.52);
+  padding: 2.3rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.5rem;
 }
 
-.service-block-content h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.5rem);
-  line-height: 0.95;
-}
+.service-block-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.2rem, 4vw, 3.5rem); line-height: 0.95; color: var(--text); text-shadow: none; }
+.service-block-content h2 span { color: var(--ember); }
+.service-block-content p { font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: var(--text-muted); line-height: 1.75; font-weight: 300; }
 
-.service-block-content h2 span {
-  color: var(--ember);
-}
+.service-includes { display: flex; flex-direction: column; gap: 0.6rem; }
+.service-includes li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.88rem; color: var(--text-muted); }
+.service-includes li::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--ember); flex-shrink: 0; }
 
-.service-block-content p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.75;
-  font-weight: 300;
-}
-
-.service-includes {
+/* Service count boxes (Why OGS section) */
+.about-value {
+  background: rgba(255,255,255,0.78);
+  padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-}
-
-.service-includes li {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  font-size: 0.88rem;
-  color: var(--text-muted);
-}
-
-.service-includes li::before {
-  content: '';
-  display: block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ember);
-  flex-shrink: 0;
-}
-
-/* ─────────────────────────────────────────────
-   BRANDS PAGE
-   ───────────────────────────────────────────── */
-.brands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-.brand-card {
-  background: var(--charcoal-2);
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.2rem;
+  gap: 0.8rem;
   transition: background 0.25s;
-  position: relative;
-  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.06);
 }
 
-.brand-card::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--ember), var(--gold));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.brand-card:hover {
-  background: var(--charcoal-3);
-}
-
-.brand-card:hover::after {
-  transform: scaleX(1);
-}
-
-.brand-card-logo {
-  height: 44px;
-  width: auto;
-  object-fit: contain;
-  filter: grayscale(100%) brightness(1.8);
-  transition: filter 0.4s;
-}
-
-.brand-card:hover .brand-card-logo {
-  filter: grayscale(0%) brightness(1);
-}
-
-.brand-card h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.5rem;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-
-.brand-card p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 0.95rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  font-weight: 300;
-  flex: 1;
-}
-
-.brand-card-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ember);
-  border: 1px solid rgba(232,98,42,0.3);
-  padding: 0.2rem 0.55rem;
-  border-radius: 1px;
-  font-weight: 500;
-}
+.about-value:hover { background: rgba(255,255,255,0.72); }
+.about-value-num { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; color: var(--ember); line-height: 1; opacity: 0.45; }
+.about-value h3 { font-size: 1rem; font-weight: 500; color: var(--text); }
+.about-value p { font-size: 0.85rem; color: var(--text-muted); line-height: 1.65; font-weight: 300; font-family: 'Crimson Pro', serif; }
 
 /* ─────────────────────────────────────────────
    ABOUT PAGE
@@ -1421,27 +1133,17 @@ section {
   gap: 0;
   background: var(--border);
   border: 1px solid var(--border);
-  margin: 0 4rem;
+  margin: 0 2.6rem;
 }
 
-.about-story-img {
-  position: relative;
-  overflow: hidden;
-  min-height: 560px;
-}
-
-.about-story-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-}
+.about-story-img { position: relative; overflow: hidden; min-height: 560px; }
+.about-story-img img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
 .about-story-badge {
   position: absolute;
   top: 1.5rem;
   left: 1.5rem;
-  background: var(--charcoal);
+  background: rgba(255,255,255,0.85);
   border: 1px solid var(--border-warm);
   color: var(--gold);
   font-family: 'Bebas Neue', sans-serif;
@@ -1452,78 +1154,113 @@ section {
 }
 
 .about-story-content {
-  background: var(--charcoal-2);
-  padding: 4rem;
+  background: rgba(237,234,230,0.52);
+  padding: 2.6rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 1.5rem;
 }
 
-.about-story-content h2 {
+.about-story-content h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(2.5rem, 4.5vw, 4rem); line-height: 0.93; color: var(--text); }
+.about-story-content h2 span { color: var(--ember); }
+.about-story-content p { font-family: 'Crimson Pro', serif; font-size: 1.1rem; color: var(--text-muted); line-height: 1.8; font-weight: 300; }
+
+/* STORE FRONT IMAGE */
+.store-front-wrap {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  margin: 0 auto;
+  max-width: 653px;
+  width: 100%;
+  background: transparent;
+}
+
+.store-front-wrap img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+}
+
+.store-front-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 35%, rgba(26,23,21,0.45) 65%, rgba(26,23,21,0.78) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.store-badge {
+  position: absolute;
+  bottom: 1.2rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 2;
+}
+
+.store-badge > div:last-child {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 4.5vw, 4rem);
-  line-height: 0.93;
+  font-size: 1.5rem;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  margin-top: 0.4rem;
 }
 
-.about-story-content h2 span {
-  color: var(--ember);
-}
-
-.about-story-content p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1.1rem;
-  color: var(--text-muted);
-  line-height: 1.8;
-  font-weight: 300;
-}
-
+/* About values grid */
 .about-values {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--border);
   border: 1px solid var(--border);
-  margin: 0 4rem;
+  border-top: 3px solid var(--ember);
+  margin: 0 2.6rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
-.about-value {
-  background: var(--charcoal-2);
-  padding: 2.5rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.8rem;
-  transition: background 0.25s;
+/* Stat bar */
+.about-stats-grid {
+  background: rgba(255,255,255,0.78);
+  border: 1px solid var(--border-warm);
+  border-top: 3px solid var(--ember);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  max-width: 800px;
+  margin: 0 auto;
+  display: grid;
 }
 
-.about-value:hover {
-  background: var(--charcoal-3);
+/* Hours/location grid */
+.about-hours-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  background: #F5F2EE;
 }
 
-.about-value-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 3rem;
-  color: var(--ember);
-  line-height: 1;
-  opacity: 0.4;
+.about-hours-panel {
+  background: #F5F2EE;
+  padding: 2.5rem;
+  border-left: 3px solid var(--ember);
 }
 
-.about-value h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.4rem;
-  letter-spacing: 0.04em;
+.about-location-panel {
+  background: #F5F2EE;
+  border-left: 3px solid var(--ember);
+  padding: 2.5rem;
 }
 
-.about-value p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.65;
-  font-weight: 300;
-}
+.hours-grid { display: flex; flex-direction: column; gap: 0.4rem; }
+.hours-row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.4rem 0; border-bottom: 1px solid rgba(0,0,0,0.07); color: var(--text-muted); }
+.hours-row:last-child { border-bottom: none; }
+.hours-row .day { font-weight: 500; color: var(--text); }
+.hours-row .time { color: var(--text-muted); font-family: 'Crimson Pro', serif; font-size: 0.9rem; }
 
 /* ─────────────────────────────────────────────
-   CONTACT / APPOINTMENT PAGE
+   CONTACT PAGE
    ───────────────────────────────────────────── */
 .contact-grid {
   display: grid;
@@ -1531,30 +1268,21 @@ section {
   gap: 0;
   background: var(--border);
   border: 1px solid var(--border);
-  margin: 0 4rem;
+  margin: 0 2.6rem;
 }
 
 .contact-info-panel {
-  background: var(--charcoal-2);
-  padding: 3.5rem;
+  background: rgba(237,234,230,0.52);
+  padding: 2.3rem;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2rem;
   border-right: 1px solid var(--border);
 }
 
-.contact-info-panel h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.03em;
-  margin-bottom: 0.5rem;
-}
+.contact-info-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.03em; margin-bottom: 0.5rem; color: var(--text); }
 
-.contact-detail-item {
-  display: flex;
-  gap: 1rem;
-  align-items: flex-start;
-}
+.contact-detail-item { display: flex; gap: 1rem; align-items: flex-start; }
 
 .contact-detail-icon {
   width: 36px;
@@ -1568,104 +1296,21 @@ section {
   margin-top: 2px;
 }
 
-.contact-detail-icon svg {
-  width: 16px;
-  height: 16px;
-  stroke: var(--ember);
-  fill: none;
-  stroke-width: 1.5;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
+.contact-detail-icon svg { width: 16px; height: 16px; stroke: var(--ember); fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.contact-detail-label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 0.3rem; font-weight: 500; }
+.contact-detail-value { font-size: 0.95rem; color: var(--text); line-height: 1.5; }
+.contact-detail-value a { color: var(--text); transition: color 0.2s; }
+.contact-detail-value a:hover { color: var(--ember); }
 
-.contact-detail-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  margin-bottom: 0.3rem;
-  font-weight: 500;
-}
+.contact-form-panel { background: rgba(228,224,218,0.78); padding: 2.3rem; }
+.contact-form-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.03em; margin-bottom: 2rem; color: var(--text); }
 
-.contact-detail-value {
-  font-size: 0.95rem;
-  color: var(--text);
-  line-height: 1.5;
-}
-
-.contact-detail-value a {
-  color: var(--text);
-  transition: color 0.2s;
-}
-
-.contact-detail-value a:hover {
-  color: var(--ember);
-}
-
-.hours-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.hours-row {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border);
-  color: var(--text-muted);
-}
-
-.hours-row:last-child {
-  border-bottom: none;
-}
-
-.hours-row .day {
-  font-weight: 500;
-  color: var(--text);
-}
-
-.hours-row .time {
-  color: var(--text-muted);
-  font-family: 'Crimson Pro', serif;
-  font-size: 0.9rem;
-}
-
-/* APPOINTMENT FORM */
-.contact-form-panel {
-  background: var(--charcoal-3);
-  padding: 3.5rem;
-}
-
-.contact-form-panel h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.8rem;
-  letter-spacing: 0.03em;
-  margin-bottom: 2rem;
-}
-
-.form-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
-}
-
-.form-row.full {
-  grid-template-columns: 1fr;
-}
+.form-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); }
+.form-row.full { grid-template-columns: 1fr; }
 
 .form-field {
-  background: var(--charcoal-4);
+  background: rgba(255,255,255,0.80);
   padding: 1.2rem 1.4rem;
   display: flex;
   flex-direction: column;
@@ -1673,59 +1318,14 @@ section {
   transition: background 0.2s;
 }
 
-.form-field:focus-within {
-  background: var(--smoke);
-}
+.form-field:focus-within { background: #ffffff; }
+.form-field label { font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-dim); font-weight: 500; }
+.form-field input, .form-field select, .form-field textarea { background: transparent; border: none; outline: none; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 300; resize: none; width: 100%; -webkit-appearance: none; }
+.form-field select option { background: #fff; color: var(--text); }
+.form-field input::placeholder, .form-field textarea::placeholder { color: #B0A898; }
 
-.form-field label {
-  font-size: 0.62rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  font-weight: 500;
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
-  background: transparent;
-  border: none;
-  outline: none;
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 300;
-  resize: none;
-  width: 100%;
-  -webkit-appearance: none;
-}
-
-.form-field select option {
-  background: var(--charcoal-4);
-  color: var(--text);
-}
-
-.form-field input::placeholder,
-.form-field textarea::placeholder {
-  color: var(--text-dim);
-}
-
-.form-submit-row {
-  background: var(--charcoal-4);
-  padding: 1.4rem 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
-.form-note {
-  font-size: 0.73rem;
-  color: var(--text-dim);
-  font-weight: 300;
-  font-family: 'Crimson Pro', serif;
-  font-style: italic;
-}
+.form-submit-row { background: rgba(220,216,210,0.95); padding: 1.4rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.form-note { font-size: 0.73rem; color: var(--text-dim); font-weight: 300; font-family: 'Crimson Pro', serif; font-style: italic; }
 
 .form-submit {
   background: var(--ember);
@@ -1743,185 +1343,84 @@ section {
   white-space: nowrap;
 }
 
-.form-submit:hover {
-  background: var(--ember-light);
-  transform: translateY(-1px);
-}
+.form-submit:hover { background: var(--ember-light); transform: translateY(-1px); }
 
-.form-success {
-  display: none;
-  text-align: center;
-  padding: 3rem;
-  background: var(--charcoal-4);
-  border: 1px solid var(--border-warm);
-}
+.form-success { display: none; text-align: center; padding: 3rem; background: rgba(255,255,255,0.85); border: 1px solid var(--border-warm); }
+.form-success.show { display: block; }
+.form-success h3 { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--ember); margin-bottom: 0.5rem; }
+.form-success p { font-family: 'Crimson Pro', serif; font-size: 1.05rem; color: var(--text-muted); font-style: italic; }
 
-.form-success.show {
-  display: block;
-}
-
-.form-success h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 2rem;
-  color: var(--ember);
-  margin-bottom: 0.5rem;
-}
-
-.form-success p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  font-style: italic;
-}
-
-/* Map embed */
-.contact-map {
-  width: 100%;
-  height: 300px;
-  border: none;
-  display: block;
-  filter: grayscale(60%) contrast(1.1);
-  border-top: 1px solid var(--border);
-}
+.contact-map { width: 100%; height: 300px; border: none; display: block; filter: grayscale(30%) contrast(1.05); border-top: 1px solid var(--border); }
 
 /* ─────────────────────────────────────────────
    FOOTER
    ───────────────────────────────────────────── */
 footer {
-  background: var(--charcoal-2);
-  border-top: 1px solid var(--border);
+  background: #EDEAE6;
+  border-top: 2px solid var(--ember);
 }
 
 .footer-top {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 3rem;
-  padding: 4rem 4rem 3rem;
-  border-bottom: 1px solid var(--border);
+  gap: 2rem;
+  padding: 2rem 2.6rem 1.8rem;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: #EDEAE6;
 }
 
-.footer-brand img {
-  height: 52px;
-  width: auto;
-  margin-bottom: 1.2rem;
-}
+.footer-brand img { height: 40px; width: auto; margin-bottom: 0.75rem; }
+.footer-brand p { font-family: 'Crimson Pro', serif; font-size: 0.82rem; color: var(--text-dim); line-height: 1.55; font-weight: 300; font-style: italic; max-width: 220px; }
 
-.footer-brand p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 0.95rem;
-  color: var(--text-dim);
-  line-height: 1.7;
-  font-weight: 300;
-  font-style: italic;
-  max-width: 280px;
-}
+.footer-col h4 { font-family: 'Bebas Neue', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; color: var(--text); margin-bottom: 0.7rem; }
+.footer-col ul { display: flex; flex-direction: column; gap: 0.35rem; }
+.footer-col ul a { font-size: 0.78rem; color: var(--text-dim); transition: color 0.2s; }
+.footer-col ul a:hover { color: var(--ember); }
+.footer-col .footer-contact-item { font-size: 0.78rem; color: var(--text-dim); line-height: 1.5; margin-bottom: 0.3rem; }
+.footer-col .footer-contact-item a { color: var(--text-dim); transition: color 0.2s; }
+.footer-col .footer-contact-item a:hover { color: var(--ember); }
 
-.footer-col h4 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: 0.08em;
-  color: var(--text);
-  margin-bottom: 1.2rem;
-}
-
-.footer-col ul {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.footer-col ul a {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  transition: color 0.2s;
-}
-
-.footer-col ul a:hover {
-  color: var(--ember);
-}
-
-.footer-col .footer-contact-item {
-  font-size: 0.85rem;
-  color: var(--text-dim);
-  line-height: 1.6;
-  margin-bottom: 0.5rem;
-}
-
-.footer-col .footer-contact-item a {
-  color: var(--text-muted);
-  transition: color 0.2s;
-}
-
-.footer-col .footer-contact-item a:hover {
-  color: var(--ember);
-}
-
-.footer-social {
-  display: flex;
-  gap: 0.75rem;
-  margin-top: 1.5rem;
-}
+.footer-social { display: flex; gap: 0.5rem; margin-top: 0.85rem; }
 
 .footer-social a {
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--border);
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0,0,0,0.12);
   border-radius: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--text-dim);
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
-.footer-social a:hover {
-  border-color: var(--ember);
-  color: var(--ember);
-  background: var(--ember-glow);
-}
+.footer-social a:hover { border-color: var(--ember); color: var(--ember); background: rgba(212,84,30,0.06); }
 
 .footer-bottom {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.5rem 4rem;
+  padding: 0.9rem 2.6rem;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+  background: #E4E0DB;
 }
 
-.footer-copy {
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  font-weight: 300;
-}
-
-.footer-bottom-links {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.footer-bottom-links a {
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--text-dim);
-  transition: color 0.2s;
-}
-
-.footer-bottom-links a:hover {
-  color: var(--ember);
-}
+.footer-copy { font-size: 0.7rem; color: var(--text-dim); font-weight: 300; }
+.footer-bottom-links { display: flex; gap: 1.5rem; }
+.footer-bottom-links a { font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-dim); transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--ember); }
 
 /* ─────────────────────────────────────────────
-   RELOCATION NOTICE BADGE
+   MISC COMPONENTS
    ───────────────────────────────────────────── */
 .relocating-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: var(--ember-glow);
-  border: 1px solid rgba(232,98,42,0.3);
+  background: rgba(212,84,30,0.12);
+  border: 1px solid rgba(212,84,30,0.30);
   color: var(--ember);
   font-size: 0.7rem;
   letter-spacing: 0.14em;
@@ -1931,42 +1430,9 @@ footer {
   font-weight: 500;
 }
 
-.relocating-badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--ember);
-  animation: blink 1.4s ease infinite;
-}
+.relocating-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--ember); animation: blink 1.4s ease infinite; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.2; } }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.2; }
-}
-
-/* ─────────────────────────────────────────────
-   SCROLL REVEAL
-   ───────────────────────────────────────────── */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s ease, transform 0.65s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-
-/* ─────────────────────────────────────────────
-   BACK TO TOP
-   ───────────────────────────────────────────── */
 #back-top {
   position: fixed;
   bottom: 2rem;
@@ -1989,2611 +1455,301 @@ footer {
   pointer-events: none;
 }
 
-#back-top.visible {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-#back-top:hover {
-  background: var(--ember-light);
-}
+#back-top.visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+#back-top:hover { background: var(--ember-light); }
 
 /* ─────────────────────────────────────────────
-   RESPONSIVE
+   SCROLL REVEAL
    ───────────────────────────────────────────── */
-@media (max-width: 1100px) {
-  .footer-top {
-    grid-template-columns: 1fr 1fr;
-  }
-  .reviews-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media (max-width: 900px) {
-  /* Nav */
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-  .nav-drawer { display: flex; }
-  nav { padding: 0 1.5rem; }
-
-  /* Sections */
-  section { padding: 4rem 1.5rem; }
-
-  /* Hero */
-  .hero { padding: 7rem 1.5rem 4rem; }
-  .hero-bg { background-attachment: scroll; }
-  .hero-stats { flex-wrap: wrap; }
-  .hero-stat { flex: 1; min-width: 120px; padding: 1rem 1.2rem; }
-
-  /* Services strip */
-  .services-strip {
-    grid-template-columns: 1fr;
-    margin: 0 1.5rem;
-  }
-
-  /* About preview */
-  .about-preview {
-    grid-template-columns: 1fr;
-    margin: 0 1.5rem;
-  }
-
-  .about-preview-img { min-height: 280px; }
-  .about-preview-content { padding: 2rem; }
-
-  /* Brand strip */
-  .brand-strip-section { padding: 3rem 1.5rem; }
-
-  /* Reviews */
-  .reviews-grid { grid-template-columns: 1fr; }
-
-  /* CTA band */
-  .cta-band { background-attachment: scroll; }
-  .cta-band { padding: 4rem 1.5rem; }
-
-  /* Page hero */
-  .page-hero { padding: 3rem 1.5rem 2rem; }
-
-  /* Catalog filter */
-  .catalog-filter {
-    padding: 1.2rem 1.5rem;
-    top: 60px;
-  }
-
-  /* Catalog category */
-  .catalog-category { padding: 2.5rem 1.5rem; }
-
-  /* Service block */
-  .service-block {
-    grid-template-columns: 1fr;
-    margin: 0 1.5rem 1px;
-    direction: ltr;
-  }
-  .service-block.reverse { direction: ltr; }
-  .service-block-img { min-height: 240px; }
-  .service-block-content { padding: 2rem; }
-
-  /* Brands grid */
-  .brands-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* About */
-  .about-story {
-    grid-template-columns: 1fr;
-    margin: 0 1.5rem;
-  }
-  .about-story-img { min-height: 300px; }
-  .about-story-content { padding: 2rem; }
-  .about-values {
-    grid-template-columns: 1fr;
-    margin: 0 1.5rem;
-  }
-
-  /* Contact */
-  .contact-grid {
-    grid-template-columns: 1fr;
-    margin: 0 1.5rem;
-  }
-  .contact-info-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem; }
-  .contact-form-panel { padding: 2rem; }
-
-  /* Form */
-  .form-row { grid-template-columns: 1fr; }
-  .form-submit-row { flex-direction: column; align-items: stretch; }
-  .form-submit { width: 100%; text-align: center; }
-
-  /* Footer */
-  .footer-top {
-    grid-template-columns: 1fr;
-    padding: 3rem 1.5rem 2rem;
-    gap: 2rem;
-  }
-  .footer-bottom {
-    padding: 1.5rem;
-    flex-direction: column;
-    text-align: center;
-  }
-  .footer-bottom-links { flex-wrap: wrap; justify-content: center; }
-}
-
-@media (max-width: 600px) {
-  .hero-title {
-    font-size: clamp(3.5rem, 14vw, 5rem);
-  }
-  .brands-grid { grid-template-columns: 1fr; }
-  .about-values { grid-template-columns: 1fr; }
-  .hero-stat-num { font-size: 1.6rem; }
-  .hero-stat-label { font-size: 0.5rem; }
-}
-
-/* ============================================================
-   PATCH 1 — Fixed background hero (PC + Mobile)
-   The hero-bg pseudo-element stays fixed on desktop.
-   On mobile, background-attachment:fixed is disabled by iOS/Android
-   so we use a fixed pseudo-element on the body instead.
-   ============================================================ */
-
-/* Global fixed background — sits behind everything */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url('assets/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  z-index: -2;
-  pointer-events: none;
-}
-
-/* Remove the old .hero-bg div approach — keep overlay only */
-.hero-bg {
-  display: none;
-}
-
-/* ============================================================
-   PATCH 2 — Transparent section backgrounds
-   All solid-black section/card backgrounds become semi-transparent
-   so the hero image bleeds through subtly on every page.
-   ============================================================ */
-body {
-  background: transparent;
-}
-
-.marquee-strip,
-.brand-strip-section,
-.reviews-section,
-.services-section,
-.process-section,
-.contact-section,
-.about-preview-content,
-.service-block-content,
-.about-story-content,
-.contact-info-panel,
-.contact-form-panel,
-.catalog-filter,
-.catalog-category,
-.page-hero,
-.footer-top,
-footer {
-  background: rgba(17, 17, 16, 0.82) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* Service pillars */
-.service-pillar {
-  background: rgba(26, 25, 24, 0.80) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.service-pillar:hover {
-  background: rgba(34, 33, 32, 0.88) !important;
-}
-
-/* Product cards */
-.product-card {
-  background: rgba(26, 25, 24, 0.82) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.product-card:hover {
-  background: rgba(34, 33, 32, 0.90) !important;
-}
-
-/* Review cards */
-.review-card {
-  background: rgba(34, 33, 32, 0.80) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.review-card:hover {
-  background: rgba(44, 43, 41, 0.88) !important;
-}
-
-/* Brand cards */
-.brand-card {
-  background: rgba(26, 25, 24, 0.82) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.brand-card:hover {
-  background: rgba(34, 33, 32, 0.90) !important;
-}
-
-/* About value blocks */
-.about-value {
-  background: rgba(26, 25, 24, 0.82) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-.about-value:hover {
-  background: rgba(34, 33, 32, 0.90) !important;
-}
-
-/* Form fields */
-.form-field {
-  background: rgba(44, 43, 41, 0.85) !important;
-}
-.form-field:focus-within {
-  background: rgba(58, 56, 53, 0.90) !important;
-}
-.form-submit-row {
-  background: rgba(44, 43, 41, 0.88) !important;
-}
-
-/* Footer bottom strip */
-.footer-bottom {
-  background: rgba(12, 12, 11, 0.90) !important;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* Nav already has backdrop-filter, just ensure transparency */
-nav {
-  background: rgba(17, 17, 16, 0.92) !important;
-}
-
-/* CTA band overlay — keep text readable */
-.cta-band::before {
-  background: rgba(17, 17, 16, 0.78) !important;
-}
-
-/* Hours grid rows */
-.hours-row {
-  border-bottom-color: rgba(255,255,255,0.06) !important;
-}
-
-/* ============================================================
-   PATCH 3 — Announcement banner no longer reveals background
-   The nav top offset was being undone on scroll.
-   Lock the page-top offset to account for banner + nav.
-   ============================================================ */
-.page-top {
-  padding-top: 108px !important;
-}
-
-/* When banner is hidden, pages fall back to nav height only */
-body.no-banner .page-top {
-  padding-top: 72px !important;
-}
-
-/* ============================================================
-   PATCH 4 — About page store-front image fix
-   Less zoom, better proportions on both PC and mobile.
-   ============================================================ */
-.store-front-wrap {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  height: 340px;           /* controlled height, not too tall */
-  margin: 0 4rem;
-}
-
-.store-front-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;  /* shows more of the building, less sky */
-  display: block;
-}
-
-.store-front-wrap .store-badge {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 2rem;
-}
-
-@media (max-width: 900px) {
-  .store-front-wrap {
-    height: 220px;
-    margin: 0 1.5rem;
-  }
-}
-
-/* ============================================================
-   PATCH 5 — Brand logos always full color (no grayscale)
-   ============================================================ */
-.brand-card-logo {
-  filter: none !important;
-}
-.brand-card:hover .brand-card-logo {
-  filter: none !important;
-}
-
-/* Also fix the brand trust strip on homepage */
-.brand-strip-item {
-  opacity: 0.8 !important;
-  filter: none !important;
-}
-.brand-strip-item:hover {
-  opacity: 1 !important;
-  filter: none !important;
-}
-
-/* ============================================================
-   PATCH 6 — Mobile background fix (iOS/Android)
-   body::before handles this globally now
-   ============================================================ */
-@media (max-width: 900px) {
-  .hero-bg,
-  .cta-band {
-    background-attachment: scroll !important;
-  }
-
-  .store-front-wrap {
-    height: 200px;
-    margin: 0 1.5rem;
-  }
-}
-
-/* ============================================================
-   PATCH 7 — COMPREHENSIVE MOBILE + NAV + LAYOUT FIXES
-   ============================================================ */
-
-/* ── 1. Hide banner permanently, nav always at top:0 ── */
-#announce-banner { display: none !important; }
-nav { top: 0 !important; }
-nav.has-banner { top: 0 !important; }
-.page-top { padding-top: 72px !important; }
-
-/* ── 2. Kill ALL horizontal scroll site-wide ── */
-html, body {
-  overflow-x: hidden !important;
-  max-width: 100vw !important;
-}
-* { max-width: 100%; }
-
-/* Every section and wrapper must stay within viewport */
-section,
-.catalog-category,
-.service-block,
-.about-story,
-.about-values,
-.contact-grid,
-.footer-top,
-.footer-bottom,
-.brand-strip-section,
-.services-strip,
-.about-preview,
-.reviews-section,
-.cta-band,
-.page-hero,
-.catalog-filter {
-  overflow-x: hidden !important;
-  box-sizing: border-box !important;
-  width: 100% !important;
-  max-width: 100vw !important;
-}
-
-/* ── 3. Mobile nav: center logo, push hamburger right ── */
-@media (max-width: 900px) {
-  nav {
-    display: grid !important;
-    grid-template-columns: 40px 1fr 40px !important;
-    align-items: center !important;
-    padding: 0 1.2rem !important;
-    height: 64px !important;
-  }
-
-  /* Empty first column for visual balance */
-  nav::before {
-    content: '';
-    display: block;
-    width: 40px;
-  }
-
-  .nav-logo {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    grid-column: 2 !important;
-  }
-
-  .nav-links {
-    display: none !important;
-  }
-
-  .nav-hamburger {
-    display: flex !important;
-    grid-column: 3 !important;
-    justify-self: end !important;
-    margin-left: 0 !important;
-  }
-
-  .page-top { padding-top: 64px !important; }
-
-  /* ── 4. Full-width sections on mobile ── */
-  section {
-    padding: 3rem 1.2rem !important;
-    width: 100% !important;
-  }
-
-  .catalog-category { padding: 2.5rem 1.2rem !important; }
-  .catalog-filter { padding: 1rem 1.2rem !important; }
-  .brand-strip-section { padding: 2.5rem 1.2rem !important; }
-  .page-hero { padding: 3rem 1.2rem 2rem !important; }
-
-  /* Services strip full width */
-  .services-strip {
-    grid-template-columns: 1fr !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-  /* About preview full width */
-  .about-preview {
-    grid-template-columns: 1fr !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-  .about-preview-content { padding: 1.8rem 1.2rem !important; }
-
-  /* Service blocks full width */
-  .service-block {
-    grid-template-columns: 1fr !important;
-    margin: 0 0 1px !important;
-    width: 100% !important;
-    direction: ltr !important;
-  }
-  .service-block.reverse { direction: ltr !important; }
-  .service-block-img { min-height: 220px !important; }
-  .service-block-content { padding: 1.8rem 1.2rem !important; }
-
-  /* About story full width */
-  .about-story {
-    grid-template-columns: 1fr !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-  .about-story-img { min-height: 280px !important; }
-  .about-story-content { padding: 1.8rem 1.2rem !important; }
-
-  /* About values full width */
-  .about-values {
-    grid-template-columns: 1fr !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-  /* Store front full width */
-  .store-front-wrap {
-    margin: 0 !important;
-    height: 200px !important;
-    width: 100% !important;
-  }
-
-  /* Contact grid full width */
-  .contact-grid {
-    grid-template-columns: 1fr !important;
-    margin: 0 !important;
-    width: 100% !important;
-  }
-  .contact-info-panel {
-    border-right: none !important;
-    border-bottom: 1px solid var(--border) !important;
-    padding: 1.8rem 1.2rem !important;
-  }
-  .contact-form-panel { padding: 1.8rem 1.2rem !important; }
-
-  /* Brands grid 1 col on small mobile */
-  .brands-grid {
-    grid-template-columns: 1fr !important;
-    width: 100% !important;
-  }
-
-  /* Footer full width */
-  .footer-top {
-    grid-template-columns: 1fr !important;
-    padding: 2.5rem 1.2rem 2rem !important;
-    gap: 2rem !important;
-  }
-  .footer-bottom {
-    padding: 1.2rem !important;
-    flex-direction: column !important;
-    text-align: center !important;
-    gap: 0.75rem !important;
-  }
-
-  /* Form rows stack */
-  .form-row {
-    grid-template-columns: 1fr !important;
-  }
-
-  /* Hero stats wrap */
-  .hero-stats {
-    width: 100% !important;
-    max-width: 100% !important;
-    display: grid !important;
-    grid-template-columns: repeat(3, 1fr) !important;
-    gap: 0 !important;
-  }
-  .hero-stat {
-    padding: 0.9rem 0.5rem !important;
-    min-width: 0 !important;
-  }
-  .hero-stat-num { font-size: 1.4rem !important; }
-  .hero-stat-label { font-size: 0.45rem !important; letter-spacing: 0.08em !important; }
-
-  /* Reviews grid 1 col */
-  .reviews-grid { grid-template-columns: 1fr !important; }
-
-  /* Map full width */
-  .contact-map { margin: 0 !important; }
-
-  /* Inline section padding overrides */
-  section[style*="padding"] {
-    padding-left: 1.2rem !important;
-    padding-right: 1.2rem !important;
-  }
-
-  /* Fix any inline margin:0 4rem patterns */
-  [style*="margin: 0 4rem"],
-  [style*="margin:0 4rem"] {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    width: 100% !important;
-  }
-
-  .cta-band { padding: 3.5rem 1.2rem !important; }
-
-  /* Product grid 1 col on small screens */
-  .product-grid {
-    grid-template-columns: 1fr !important;
-  }
-}
-
-/* ── 5. Store front PC fix ── */
-/* Removed inline height, let the image breathe */
-.store-front-wrap {
-  height: auto !important;
-  max-height: 420px !important;
-  margin: 0 4rem !important;
-  overflow: hidden !important;
-  border: 1px solid var(--border) !important;
-  position: relative !important;
-}
-
-.store-front-wrap img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: 420px !important;
-  object-fit: cover !important;
-  object-position: center 20% !important;
-  display: block !important;
-}
-
-@media (max-width: 900px) {
-  .store-front-wrap {
-    margin: 0 !important;
-    max-height: 240px !important;
-  }
-  .store-front-wrap img {
-    max-height: 240px !important;
-  }
-}
-
-/* ── 6. Reviews carousel styles ── */
-.carousel-section { background: var(--charcoal-2); }
-
-.reviews-carousel-wrap {
-  position: relative;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  margin-top: 3rem;
-}
-
-.reviews-carousel-track {
-  display: flex;
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.reviews-carousel-track .review-card {
-  min-width: 100%;
-  box-sizing: border-box;
-  padding: 2.5rem 3rem;
-  background: rgba(34, 33, 32, 0.82) !important;
-  border: none !important;
-}
-
-.reviews-carousel-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.2rem 1.5rem;
-  border-top: 1px solid var(--border);
-  background: rgba(24, 24, 23, 0.88);
-}
-
-.reviews-carousel-dots {
-  display: flex;
-  gap: 0.5rem;
-  align-items: center;
-}
-
-.reviews-carousel-dot {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--text-dim);
-  border: none;
-  cursor: pointer;
-  transition: background 0.25s, transform 0.25s;
-  padding: 0;
-}
-
-.reviews-carousel-dot.active {
-  background: var(--ember);
-  transform: scale(1.4);
-}
-
-.reviews-carousel-btns {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.reviews-carousel-btn {
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--border);
-  background: transparent;
-  color: var(--text-muted);
-  border-radius: 2px;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: border-color 0.2s, color 0.2s, background 0.2s;
-}
-
-.reviews-carousel-btn:hover {
-  border-color: var(--ember);
-  color: var(--ember);
-  background: var(--ember-glow);
-}
-
-@media (max-width: 900px) {
-  .reviews-carousel-wrap .review-card {
-    padding: 2rem 1.5rem !important;
-  }
-}
-
-/* ── 7. Catalog page: brand-only cards ── */
-.catalog-brand-card {
-  background: rgba(26, 25, 24, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  border: 1px solid var(--border);
-  padding: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-  transition: background 0.25s;
-  position: relative;
-  overflow: hidden;
-}
-
-.catalog-brand-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--ember);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-}
-
-.catalog-brand-card:hover {
-  background: rgba(34, 33, 32, 0.90);
-}
-
-.catalog-brand-card:hover::before {
-  transform: scaleX(1);
-}
-
-.catalog-brand-card-logo {
-  height: 40px;
-  width: auto;
-  object-fit: contain;
-  object-position: left center;
-}
-
-.catalog-brand-card h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
-  line-height: 1;
-}
-
-.catalog-brand-card .brand-type-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ember);
-  border: 1px solid rgba(232,98,42,0.3);
-  padding: 0.2rem 0.55rem;
-  border-radius: 1px;
-  font-weight: 500;
-  width: fit-content;
-}
-
-.catalog-brand-card p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 1rem;
-  color: var(--text-muted);
-  line-height: 1.7;
-  font-weight: 300;
-  flex: 1;
-}
-
-.catalog-brand-actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 0.25rem;
-}
-
-.btn-catalog {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: var(--ember);
-  color: #fff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 2px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s, transform 0.15s;
-  text-decoration: none;
-}
-
-.btn-catalog:hover {
-  background: var(--ember-light);
-  transform: translateY(-1px);
-  color: #fff;
-}
-
-.btn-catalog-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: transparent;
-  color: var(--text-muted);
-  padding: 0.6rem 1.2rem;
-  border-radius: 2px;
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  transition: color 0.2s, border-color 0.2s, transform 0.15s;
-  text-decoration: none;
-}
-
-.btn-catalog-ghost:hover {
-  color: var(--text);
-  border-color: rgba(255,255,255,0.2);
-  transform: translateY(-1px);
-}
-
-.catalog-brands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-@media (max-width: 900px) {
-  .catalog-brands-grid {
-    grid-template-columns: 1fr !important;
-  }
-  .catalog-brand-card {
-    padding: 1.8rem 1.2rem !important;
-  }
-}
-
-/* ============================================================
-   EXPLORE BRANDS PAGE — Card styles with product image
-   ============================================================ */
-
-.explore-brands-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-}
-
-.explore-brand-card {
-  background: rgba(26, 25, 24, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  display: flex;
-  flex-direction: column;
-  transition: background 0.25s;
-  overflow: hidden;
-  position: relative;
-}
-
-.explore-brand-card:hover {
-  background: rgba(34, 33, 32, 0.92);
-}
-
-/* Product image area */
-.explore-brand-img-wrap {
-  position: relative;
-  width: 100%;
-  height: 220px;
-  overflow: hidden;
-  background: var(--charcoal-3);
-  flex-shrink: 0;
-}
-
-.explore-brand-img-wrap img:first-child {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  transition: transform 0.5s ease;
-}
-
-.explore-brand-card:hover .explore-brand-img-wrap img:first-child {
-  transform: scale(1.05);
-}
-
-/* Dark gradient overlay over image */
-.explore-brand-img-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(17,17,16,0.1) 0%,
-    rgba(17,17,16,0.5) 70%,
-    rgba(17,17,16,0.85) 100%
-  );
-  z-index: 1;
-}
-
-/* Brand logo sits over the image at bottom-left */
-.explore-brand-logo {
-  position: absolute !important;
-  bottom: 1rem;
-  left: 1.2rem;
-  height: 32px !important;
-  width: auto !important;
-  object-fit: contain !important;
-  object-position: left center !important;
-  z-index: 2;
-  filter: brightness(0) invert(1) !important;
-  opacity: 0.92;
-  transition: opacity 0.2s !important;
-  max-width: 140px;
-}
-
-.explore-brand-card:hover .explore-brand-logo {
-  opacity: 1;
-}
-
-/* No-image fallback state */
-.explore-brand-img-wrap.no-img {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--charcoal-3);
-}
-
-.explore-brand-img-wrap.no-img img:first-child {
-  display: none;
-}
-
-.explore-brand-img-wrap.no-img .explore-brand-img-overlay {
-  display: none;
-}
-
-.explore-brand-img-wrap.no-img .explore-brand-logo {
-  position: static !important;
-  height: 44px !important;
-  filter: grayscale(0%) brightness(1) !important;
-  opacity: 0.7;
-  max-width: 160px;
-}
-
-/* Text body below image */
-.explore-brand-body {
-  padding: 1.6rem 1.8rem 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  flex: 1;
-}
-
-.explore-brand-body h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
-  line-height: 1;
-  color: var(--text);
-}
-
-/* Tag pills */
-.explore-brand-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-}
-
-.explore-brand-tags span {
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ember);
-  border: 1px solid rgba(232,98,42,0.35);
-  padding: 0.18rem 0.55rem;
-  border-radius: 1px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.explore-brand-body p {
-  font-family: 'Crimson Pro', serif;
-  font-size: 0.98rem;
-  color: var(--text-muted);
-  line-height: 1.72;
-  font-weight: 300;
-  flex: 1;
-}
-
-.explore-brand-actions {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  margin-top: 0.25rem;
-}
-
-/* Top accent bar on hover */
-.explore-brand-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--ember), var(--gold));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.4s ease;
-  z-index: 10;
-}
-
-.explore-brand-card:hover::before {
-  transform: scaleX(1);
-}
-
-@media (max-width: 900px) {
-  .explore-brands-grid {
-    grid-template-columns: 1fr !important;
-  }
-
-  .explore-brand-img-wrap {
-    height: 200px;
-  }
-
-  .explore-brand-body {
-    padding: 1.4rem 1.2rem 1.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore-brand-img-wrap {
-    height: 180px;
-  }
-}
-
-/* ============================================================
-   PATCH 8 — White box fix, service section transparency,
-              store front image, hero section separation
-   ============================================================ */
-
-/* ── 1. WHITE BOXES ON EXPLORE CARDS ──
-   The brand logos have white backgrounds from the original PNG files.
-   We hide the rectangular white background by using mix-blend-mode
-   so only the logo artwork shows, not the white rectangle around it.
-   Also adds a dark pill behind the logo for legibility on light images. */
-
-.explore-brand-logo {
-  mix-blend-mode: screen !important;
-  background: transparent !important;
-}
-
-/* Dark pill behind logo so it reads on any image color */
-.explore-brand-img-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 0.7rem;
-  left: 0.85rem;
-  height: 46px;
-  width: 160px;
-  background: rgba(0, 0, 0, 0.55);
-  border-radius: 3px;
-  z-index: 1;
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-}
-
-/* Logo stays above the pill */
-.explore-brand-logo {
-  z-index: 3 !important;
-}
-
-/* No-image state — no pill needed, logo shows in color */
-.explore-brand-img-wrap.no-img::after {
-  display: none;
-}
-
-.explore-brand-img-wrap.no-img .explore-brand-logo {
-  mix-blend-mode: normal !important;
-  filter: none !important;
-  opacity: 0.85;
-}
-
-/* ── 2. SERVICE "YOU CAN COUNT ON" SECTION TRANSPARENCY ──
-   The 4-box grid in services.html needs transparency like everything else. */
-
-.about-value,
-[style*="grid-template-columns:repeat(auto-fit"] .about-value,
-.services-section .about-value {
-  background: rgba(26, 25, 24, 0.80) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-}
-
-.about-value:hover {
-  background: rgba(34, 33, 32, 0.90) !important;
-}
-
-/* Target the inline-styled grid in services.html directly */
-.service-count-grid {
-  background: transparent !important;
-}
-
-/* ── 3. STORE FRONT IMAGE — complete rewrite ──
-   Let the image breathe. Remove all height constraints
-   and let it display at its natural aspect ratio
-   so nothing gets cropped or zoomed. */
-
-.store-front-wrap {
-  position: relative !important;
-  overflow: hidden !important;
-  border: 1px solid var(--border) !important;
-  margin: 0 4rem !important;
-  height: auto !important;
-  max-height: none !important;
-  background: var(--charcoal-3);
-}
-
-.store-front-wrap img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  object-fit: fill !important;
-  object-position: unset !important;
-  display: block !important;
-}
-
-.store-front-wrap .store-badge {
-  position: absolute;
-  bottom: 1.2rem;
-  left: 1.5rem;
-  z-index: 2;
-}
-
-@media (max-width: 900px) {
-  .store-front-wrap {
-    margin: 0 !important;
-    width: 100% !important;
-  }
-
-  .store-front-wrap img {
-    width: 100% !important;
-    height: auto !important;
-    object-fit: fill !important;
-  }
-}
-
-/* ── 4. HERO SECTION SEPARATION ──
-   The page-hero on inner pages uses hero-bg.jpg as a faint overlay.
-   We change it to use the store-front image instead so it feels
-   different from the main background. If store-front image is not
-   saved yet it falls back to a dark charcoal. */
-
-.page-hero::before {
-  background-image: url('assets/store-front.jpg') !important;
-  background-size: cover !important;
-  background-position: center 35% !important;
-  opacity: 0.12 !important;
-}
-
-/* ── 5. INLINE SECTION GRIDS — transparency fix for services page ──
-   Any inline grid container that wraps about-value cards needs
-   a transparent background rather than the default solid charcoal. */
-[style*="display:grid"][style*="background:var(--border)"],
-[style*="display:grid"][style*="background: var(--border)"] {
-  background: rgba(255,255,255,0.06) !important;
-}
-
-
-/* Store front overlay - separate from the img so image shows fully */
-.store-front-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    to bottom,
-    transparent 60%,
-    rgba(17,17,16,0.65) 100%
-  );
-  z-index: 1;
-  pointer-events: none;
-}
-
-.store-badge {
-  position: absolute;
-  bottom: 1.2rem;
-  left: 1.5rem;
-  z-index: 2;
-}
-
-
-/* ============================================================
-   PATCH 9 — White boxes, store front zoom, stats transparency,
-              section padding reduction, remove page-hero bg
-   ============================================================ */
-
-/* ── 1. WHITE BOXES — NUCLEAR FIX ──
-   mix-blend-mode doesn't work reliably across all browsers
-   when the parent has backdrop-filter. Switch to a different
-   approach: hide the logo img entirely in the image wrap and
-   show a CSS-only brand name fallback, OR just make the pill
-   dark enough that the white logo reads against it cleanly.
-   The real fix: make the pill wider/taller and remove mix-blend-mode. */
-
-.explore-brand-logo {
-  mix-blend-mode: normal !important;
-  filter: brightness(0) invert(1) drop-shadow(0 1px 3px rgba(0,0,0,0.8)) !important;
-  opacity: 1 !important;
-  z-index: 3 !important;
-  bottom: 0.9rem !important;
-  left: 1rem !important;
-  height: 28px !important;
-  max-width: 130px !important;
-  background: transparent !important;
-  /* Force the image itself to be treated as transparent-bg */
-  image-rendering: crisp-edges;
-}
-
-/* The dark pill behind logo — make it tight and proportional */
-.explore-brand-img-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 0.65rem;
-  left: 0.75rem;
-  height: 40px;
-  width: 150px;
-  background: rgba(0, 0, 0, 0.72);
-  border-radius: 2px;
-  z-index: 2;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.06);
-}
-
-.explore-brand-img-wrap.no-img::after {
-  display: none !important;
-}
-
-/* ── 2. STORE FRONT IMAGE — give user a CSS variable to tune ──
-   object-position controls the crop. 
-   "center top" = show top of image (sign area)
-   "center 15%" = 15% from top
-   TUNE THIS: change the % to adjust what shows */
-
-.store-front-wrap {
-  position: relative !important;
-  overflow: hidden !important;
-  border: 1px solid var(--border) !important;
-  margin: 0 4rem !important;
-  /* HEIGHT: controls how much vertical space the image takes */
-  height: 320px !important;
-  max-height: 320px !important;
-}
-
-.store-front-wrap img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  /* ZOOM CONTROL: change this percentage to adjust crop position.
-     0% = very top of image
-     50% = center of image  
-     Try values between 5% and 25% to show the sign */
-  object-position: center 8% !important;
-  display: block !important;
-}
-
-@media (max-width: 900px) {
-  .store-front-wrap {
-    margin: 0 !important;
-    width: 100% !important;
-    height: 220px !important;
-    max-height: 220px !important;
-  }
-
-  .store-front-wrap img {
-    object-position: center 8% !important;
-  }
-}
-
-/* ── 3. STATS BAND — transparent with ember trim ── */
-
-/* Remove the solid dark background from the stats section wrapper */
-section[style*="background:var(--charcoal-2)"][style*="border-top"] {
-  background: transparent !important;
-  backdrop-filter: none !important;
-}
-
-/* The stat grid wrapper */
-.hero-stats,
-[style*="grid-template-columns:repeat(auto-fit, minmax(160px"] {
-  background: rgba(17, 17, 16, 0.55) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid var(--border-warm) !important;
-  border-top: 3px solid var(--ember) !important;
-  box-shadow: 0 0 40px rgba(232, 98, 42, 0.08) !important;
-}
-
-/* Individual stat cells */
-.hero-stat {
-  background: transparent !important;
-  position: relative;
-}
-
-.hero-stat::before {
-  background: linear-gradient(90deg, var(--ember), var(--gold)) !important;
-  box-shadow: 0 0 10px rgba(232,98,42,0.4) !important;
-}
-
-/* ── 4. SECTION PADDING — reduce by 35% across all pages ──
-   Base was 6rem 4rem → 35% less = 3.9rem 2.6rem → round to 4rem 2.6rem */
-
-section {
-  padding: 3.9rem 2.6rem !important;
-}
-
-/* Keep catalog filter full width */
-.catalog-filter {
-  padding: 0.85rem 2.6rem !important;
-}
-
-/* Inline sections with padding:4rem or padding:5rem */
-/* These are handled via !important overrides in mobile patch already.
-   We target the most common inline style values: */
-
-/* Page hero reduced */
-.page-hero {
-  padding: 3.25rem 2.6rem 2.25rem !important;
-}
-
-/* Service blocks keep their internal spacing */
-.service-block-content {
-  padding: 2.3rem !important;
-}
-
-.about-story-content {
-  padding: 2.6rem !important;
-}
-
-.contact-info-panel {
-  padding: 2.3rem !important;
-}
-
-.contact-form-panel {
-  padding: 2.3rem !important;
-}
-
-.footer-top {
-  padding: 2.6rem 2.6rem 2rem !important;
-}
-
-/* CTA band */
-.cta-band {
-  padding: 3.25rem 2.6rem !important;
-}
-
-/* Mobile section padding reduced proportionally */
-@media (max-width: 900px) {
-  section {
-    padding: 2.5rem 1.2rem !important;
-  }
-  .catalog-filter {
-    padding: 0.85rem 1.2rem !important;
-  }
-  .page-hero {
-    padding: 2rem 1.2rem 1.5rem !important;
-  }
-  .cta-band {
-    padding: 2.5rem 1.2rem !important;
-  }
-  .service-block-content {
-    padding: 1.5rem 1.2rem !important;
-  }
-  .about-story-content {
-    padding: 1.5rem 1.2rem !important;
-  }
-  .contact-info-panel,
-  .contact-form-panel {
-    padding: 1.5rem 1.2rem !important;
-  }
-  .footer-top {
-    padding: 2rem 1.2rem 1.5rem !important;
-  }
-}
-
-/* ── 5. REMOVE PAGE-HERO BACKGROUND IMAGE from all inner pages ──
-   The ::before pseudo-element was showing store-front.jpg faintly.
-   Remove it entirely so inner pages have no hero background image,
-   matching the clean look of the homepage. */
-
-.page-hero {
-  background: rgba(17, 17, 16, 0.88) !important;
-  backdrop-filter: blur(4px) !important;
-  -webkit-backdrop-filter: blur(4px) !important;
-}
-
-.page-hero::before {
-  display: none !important;
-}
-
-
-/* ============================================================
-   PATCH 10 — Brand logo moved into card body (not on image)
-   ============================================================ */
-
-/* ── Remove the dark pill that was behind the old logo ── */
-.explore-brand-img-wrap::after {
-  display: none !important;
-  content: none !important;
-}
-
-/* ── Kill all old logo-on-image styles ── */
-.explore-brand-logo {
-  display: none !important;
-}
-
-/* ── New logo in the text body ── */
-.explore-body-logo {
-  display: block;
-  height: 36px;
-  width: auto;
-  max-width: 160px;
-  object-fit: contain;
-  object-position: left center;
-  margin-bottom: 0.2rem;
-  /* Show full color — no filter needed */
-  filter: none;
-  opacity: 1;
-  /* If logo has white bg, we can at least constrain it */
-  background: transparent;
-}
-
-/* On hover, logo stays the same — no greyscale effect */
-.explore-brand-card:hover .explore-body-logo {
-  opacity: 1;
-  filter: none;
-}
-
-
-/* ============================================================
-   PATCH 11 — 3 targeted fixes:
-   1. Contact page nav CTA active state (loses orange)
-   2. Services page heading text protection
-   3. About page store front square image fit
-   ============================================================ */
-
-/* ── FIX 1: Contact page Book Appointment button stays orange ──
-   When on contact.html the .nav-cta gets .active class applied
-   by initActiveNav() which overrides the orange background. */
-
-.nav-cta.active,
-.nav-links a.nav-cta.active {
-  background: var(--ember) !important;
-  color: #fff !important;
-  opacity: 1 !important;
-}
-
-.nav-cta.active:hover {
-  background: var(--ember-light) !important;
-}
-
-/* ── FIX 2: Services headings — dark scrim behind text ──
-   The section titles on services.html sit over the background
-   image with no protection. Add a dark gradient behind the
-   section heading text blocks. */
-
-.service-block-content h2 {
-  text-shadow:
-    0 2px 12px rgba(0,0,0,0.9),
-    0 1px 4px rgba(0,0,0,0.8) !important;
-}
-
-/* The section heading block that reads "Grill Repair" and
-   "Outdoor Kitchen Installation" over the hero background */
-section > .section-label,
-section > .section-title,
-section > .section-subtitle {
-  text-shadow: 0 2px 12px rgba(0,0,0,0.85), 0 1px 3px rgba(0,0,0,0.7);
-}
-
-/* Grill Repair and Outdoor Kitchen headings specifically */
-#install ~ section .section-title,
-.page-top > section .section-title {
-  position: relative;
-}
-
-/* Dark pill behind the service section label + title block */
-.services-heading-wrap {
-  position: relative;
-  display: inline-block;
-  padding: 1.2rem 1.8rem 1.2rem 0;
-}
-
-.services-heading-wrap::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(17,17,16,0.65);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border-radius: 2px;
-  z-index: -1;
-}
-
-/* ── FIX 3: Store front — square image fit ──
-   Now that the image is square, we want it to display fully
-   without being cropped. Use a taller container and
-   object-fit: contain so the full square image shows. */
-
-.store-front-wrap {
-  height: auto !important;
-  max-height: none !important;
-  background: var(--charcoal-3) !important;
-}
-
-.store-front-wrap img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: 480px !important;
-  object-fit: contain !important;
-  object-position: center center !important;
-  display: block !important;
-  background: var(--charcoal-3);
-}
-
-@media (max-width: 900px) {
-  .store-front-wrap img {
-    max-height: 320px !important;
-  }
-}
-
-
-/* ============================================================
-   BRAND WALL — replaces the old flat brand strip
-   Each logo in its own defined tile cell
-   ============================================================ */
-
-.brand-wall-section {
-  padding: 2.5rem 2.6rem;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: rgba(17, 17, 16, 0.72);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-}
-
-.brand-wall-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.brand-wall-link {
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--ember);
-  font-weight: 500;
-  transition: opacity 0.2s;
-  text-decoration: none;
-}
-
-.brand-wall-link:hover {
-  opacity: 0.75;
-}
-
-/* Top ember trim line */
-.brand-wall-section::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--ember) 20%,
-    var(--gold) 50%,
-    var(--ember) 80%,
-    transparent 100%
-  );
-  margin-bottom: 2.5rem;
-  opacity: 0.6;
-}
-
-.brand-wall-grid {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border-warm);
-}
-
-.brand-wall-tile {
-  background: rgba(26, 25, 24, 0.88);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.4rem 1.6rem;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.25s;
-  text-decoration: none;
-  min-height: 80px;
-}
-
-/* Ember glow on hover */
-.brand-wall-tile::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: var(--ember-glow);
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.brand-wall-tile:hover {
-  background: rgba(34, 33, 32, 0.95);
-}
-
-.brand-wall-tile:hover::before {
-  opacity: 1;
-}
-
-/* Bottom ember line slides in on hover */
-.brand-wall-tile::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--ember);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.35s ease;
-}
-
-.brand-wall-tile:hover::after {
-  transform: scaleX(1);
-}
-
-.brand-wall-tile img {
-  height: 28px;
-  width: auto;
-  max-width: 120px;
-  object-fit: contain;
-  object-position: center;
-  display: block;
-  position: relative;
-  z-index: 1;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  filter: grayscale(20%);
-}
-
-.brand-wall-tile:hover img {
-  transform: scale(1.06);
-  filter: grayscale(0%);
-}
-
-@media (max-width: 900px) {
-  .brand-wall-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .brand-wall-tile {
-    padding: 1.1rem 1rem;
-    min-height: 64px;
-  }
-
-  .brand-wall-tile img {
-    height: 22px;
-    max-width: 90px;
-  }
-}
-
-@media (max-width: 480px) {
-  .brand-wall-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-
-/* ============================================================
-   PATCH 12 — Three fixes:
-   1. Service count boxes transparent on PC + mobile
-   2. Scroll reveal smooth on mobile (snap fix)
-   3. About page hours/location grid full width on mobile
-   ============================================================ */
-
-/* ── FIX 1: "Service You Can Count On" boxes — transparent ──
-   The about-value class needs a proper transparent background.
-   Multiple patches have tried this but the inline style on the
-   grid wrapper and the CSS cascade keep winning. Nuclear override. */
-
-.about-value,
-div[style*="minmax(240px"] .about-value,
-div[style*="minmax(240px, 1fr)"] .about-value {
-  background: rgba(17, 17, 16, 0.55) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: none !important;
-}
-
-.about-value:hover {
-  background: rgba(26, 25, 24, 0.72) !important;
-}
-
-/* The grid wrapper itself also needs transparency */
-div[style*="minmax(240px"] {
-  background: rgba(255,255,255,0.04) !important;
-  border: 1px solid var(--border-warm) !important;
-  border-top: 2px solid var(--ember) !important;
-}
-
-/* ── FIX 2: Mobile scroll reveal — smooth transition ──
-   iOS/Android disable CSS transitions triggered during scroll
-   for performance. The fix is to use will-change and ensure
-   the transition duration is long enough to be perceived,
-   and to use transform3d to force GPU compositing. */
-
 .reveal {
   opacity: 0;
-  transform: translate3d(0, 24px, 0) !important;
-  transition: opacity 0.65s ease, transform 0.65s ease !important;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 0.65s ease, transform 0.65s ease;
   will-change: opacity, transform;
-  /* Force GPU layer — prevents snap-in on mobile */
   -webkit-transform: translate3d(0, 24px, 0);
   -webkit-transition: opacity 0.65s ease, -webkit-transform 0.65s ease;
 }
 
 .reveal.visible {
-  opacity: 1 !important;
-  transform: translate3d(0, 0, 0) !important;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
   -webkit-transform: translate3d(0, 0, 0);
 }
 
-/* Delay classes */
-.reveal-delay-1 { transition-delay: 0.1s !important; -webkit-transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s !important; -webkit-transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s !important; -webkit-transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s !important; -webkit-transition-delay: 0.4s; }
+.reveal-delay-1 { transition-delay: 0.1s; -webkit-transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; -webkit-transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; -webkit-transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; -webkit-transition-delay: 0.4s; }
 
-/* ── FIX 3: About page hours/location — stack on mobile ──
-   The 1fr 1fr grid overflows on mobile because both columns
-   have minimum content that won't shrink below ~300px each. */
+/* ─────────────────────────────────────────────
+   RESPONSIVE — TABLET (max-width: 1100px)
+   ───────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .explore-brands-grid { grid-template-columns: repeat(2, 1fr); }
+}
 
+/* ─────────────────────────────────────────────
+   RESPONSIVE — MOBILE (max-width: 900px)
+   ───────────────────────────────────────────── */
 @media (max-width: 900px) {
-  /* Target the hours/location grid */
-  div[style*="grid-template-columns:1fr 1fr"][style*="max-width:900px"] {
-    grid-template-columns: 1fr !important;
-    display: block !important;
-    max-width: 100% !important;
-    width: 100% !important;
+
+  /* Nav */
+  nav {
+    display: grid;
+    grid-template-columns: 40px 1fr 40px;
+    align-items: center;
+    padding: 0 1.2rem;
+    height: 64px;
   }
 
-  /* Each panel inside stacks and gets proper borders */
-  div[style*="grid-template-columns:1fr 1fr"][style*="max-width:900px"] > div {
-    border-left: none !important;
-    border-top: 1px solid var(--border) !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    display: block !important;
+  nav::before { content: ''; display: block; width: 40px; }
+
+  .nav-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 2;
   }
 
-  div[style*="grid-template-columns:1fr 1fr"][style*="max-width:900px"] > div:first-child {
-    border-top: none !important;
+  .nav-links { display: none; }
+
+  .nav-hamburger {
+    display: flex;
+    grid-column: 3;
+    justify-self: end;
   }
 
-  /* Make sure the button fills the width */
-  div[style*="grid-template-columns:1fr 1fr"][style*="max-width:900px"] .btn-primary {
-    width: 100% !important;
-    text-align: center !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
+  .nav-drawer { display: flex; }
+  .page-top { padding-top: 64px; }
+
+  /* Sections */
+  section { padding: 3rem 1.2rem; }
+
+  /* Sections */
+  section { padding: 3rem 0 !important; }
+
+  /* Hero */
+  .hero { padding: 6rem 1.2rem 3.5rem; }
+  .hero-bg { display: none; }
+  .hero-stats { flex-wrap: wrap; width: 100%; }
+  .hero-stat { flex: 1; min-width: 100px; padding: 0.9rem 0.8rem; }
+  .hero-stat-num { font-size: 1.5rem; }
+  .hero-stat-label { font-size: 0.48rem; letter-spacing: 0.08em; }
+
+  /* Service pillars */
+  .services-strip { grid-template-columns: 1fr; margin: 0; width: 100%; }
+  .service-pillar { padding: 2rem 1.4rem; width: 100%; }
+
+  /* Brand wall */
+  .brand-wall-section { padding: 2rem 1.2rem; }
+  .brand-wall-grid { grid-template-columns: repeat(3, 1fr); }
+  .brand-wall-tile { padding: 1rem; min-height: 60px; }
+  .brand-wall-tile img { height: 22px; max-width: 80px; }
+
+  /* About preview */
+  .about-preview { grid-template-columns: 1fr; margin: 0; width: 100%; }
+  .about-preview-img { min-height: 280px; }
+  .about-preview-content { padding: 2rem 1.4rem; width: 100%; }
+
+  /* Reviews */
+  .reviews-carousel-track .review-card { padding: 1.8rem 1.2rem; }
+
+  /* CTA band */
+  .cta-band { background-attachment: scroll; padding: 2.5rem 1.2rem; }
+
+  /* Page hero */
+  .page-hero {
+    padding: 2rem 1.2rem 1.5rem;
+    background-image: none;
+    background-attachment: scroll;
+  }
+  .page-hero::before {
+    background: linear-gradient(
+      to bottom,
+      rgba(245,242,238,0.88) 0%,
+      rgba(245,242,238,0.60) 60%,
+      rgba(245,242,238,0.10) 100%
+    );
   }
 
-  /* Relocating badge wraps properly */
-  .relocating-badge {
-    white-space: normal !important;
-    word-break: break-word !important;
-  }
-}
+  /* Catalog filter */
+  .catalog-filter { padding: 1rem 1.2rem; top: 60px; gap: 0.5rem; }
 
+  /* Explore brands */
+  .explore-brands-grid { grid-template-columns: 1fr; width: 100%; }
+  .explore-brand-img-wrap { height: 200px; }
+  .explore-brand-body { padding: 1.4rem 1.4rem 1.8rem; }
 
-/* ── About hours/location grid — proper class-based layout ── */
-.about-hours-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1px;
-}
+  /* Service blocks */
+  .service-block { grid-template-columns: 1fr; margin: 0 0 1px; direction: ltr; width: 100%; }
+  .service-block.reverse { direction: ltr; }
+  .service-block-img { min-height: 240px; }
+  .service-block-content { padding: 2rem 1.4rem; width: 100%; }
 
-.about-hours-panel {
-  background: rgba(26, 25, 24, 0.82);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
-  padding: 2.5rem;
-}
+  /* About story */
+  .about-story { grid-template-columns: 1fr; margin: 0; width: 100%; }
+  .about-story-img { min-height: 300px; }
+  .about-story-content { padding: 2rem 1.4rem; width: 100%; }
+  .about-values { grid-template-columns: 1fr; margin: 0; }
 
-.about-location-panel {
-  border-left: 1px solid var(--border);
-}
+  /* Store front */
+  .store-front-wrap { margin: 0; width: 100%; }
+  .store-front-wrap img { max-height: none; }
 
-@media (max-width: 900px) {
-  .about-hours-grid {
-    grid-template-columns: 1fr !important;
-    max-width: 100% !important;
-    width: 100% !important;
-  }
+  /* Hours grid */
+  .about-hours-grid { grid-template-columns: 1fr; }
+  .about-hours-panel { padding: 1.8rem 1.2rem; }
+  .about-location-panel { border-left: none; border-top: 1px solid var(--border); }
+  .about-hours-panel .btn-primary { width: 100%; justify-content: center; box-sizing: border-box; }
 
-  .about-hours-panel {
-    padding: 1.8rem 1.2rem !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
+  /* Contact */
+  .contact-grid { grid-template-columns: 1fr; margin: 0; width: 100%; }
+  .contact-info-panel { border-right: none; border-bottom: 1px solid var(--border); padding: 2rem 1.4rem; width: 100%; }
+  .contact-form-panel { padding: 2rem 1.4rem; width: 100%; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-submit-row { flex-direction: column; align-items: stretch; }
+  .form-submit { width: 100%; text-align: center; }
 
-  .about-location-panel {
-    border-left: none !important;
-    border-top: 1px solid var(--border) !important;
-  }
-
-  .about-hours-panel .btn-primary {
-    width: 100% !important;
-    justify-content: center !important;
-    box-sizing: border-box !important;
-  }
-}
-
-
-/* ============================================================
-   PATCH 13 — Footer: tighter PC spacing, horizontal on mobile
-   ============================================================ */
-
-/* ── PC: Tighten everything up ── */
-.footer-top {
-  gap: 2rem !important;
-  padding: 2rem 2.6rem 1.8rem !important;
-}
-
-.footer-brand img {
-  height: 40px !important;
-  margin-bottom: 0.75rem !important;
-}
-
-.footer-brand p {
-  font-size: 0.82rem !important;
-  line-height: 1.55 !important;
-  max-width: 220px !important;
-}
-
-.footer-col h4 {
-  font-size: 0.85rem !important;
-  margin-bottom: 0.7rem !important;
-  letter-spacing: 0.1em !important;
-}
-
-.footer-col ul {
-  gap: 0.35rem !important;
-}
-
-.footer-col ul a {
-  font-size: 0.78rem !important;
-}
-
-.footer-col .footer-contact-item {
-  font-size: 0.78rem !important;
-  margin-bottom: 0.3rem !important;
-  line-height: 1.5 !important;
-}
-
-.footer-social {
-  margin-top: 0.85rem !important;
-  gap: 0.5rem !important;
-}
-
-.footer-social a {
-  width: 30px !important;
-  height: 30px !important;
-  font-size: 0.72rem !important;
-}
-
-.footer-bottom {
-  padding: 0.9rem 2.6rem !important;
-}
-
-.footer-copy {
-  font-size: 0.7rem !important;
-}
-
-/* ── MOBILE: Keep horizontal 2x2 grid instead of stacking ── */
-@media (max-width: 900px) {
-  footer {
-    overflow: hidden;
-  }
-
+  /* Footer */
+  footer { overflow: hidden; }
   .footer-top {
-    /* 2 columns on mobile — brand+nav left, services+visit right */
-    grid-template-columns: 1fr 1fr !important;
-    gap: 1.2rem 1.5rem !important;
-    padding: 1.5rem 1.2rem 1.2rem !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem 1.5rem;
+    padding: 1.5rem 1.2rem 1.2rem;
   }
 
-  /* Brand takes full width across both columns */
   .footer-brand {
-    grid-column: 1 / -1 !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 1rem !important;
-    padding-bottom: 0.8rem !important;
-    border-bottom: 1px solid var(--border) !important;
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border);
   }
 
-  .footer-brand img {
-    height: 36px !important;
-    margin-bottom: 0 !important;
-    flex-shrink: 0 !important;
-  }
+  .footer-brand img { height: 36px; margin-bottom: 0; flex-shrink: 0; }
+  .footer-brand p { font-size: 0.75rem; max-width: none; margin: 0; line-height: 1.5; }
+  .footer-social { margin-top: 0; flex-shrink: 0; margin-left: auto; }
 
-  .footer-brand p {
-    font-size: 0.75rem !important;
-    max-width: none !important;
-    margin: 0 !important;
-    line-height: 1.5 !important;
-  }
+  .footer-col h4 { font-size: 0.75rem; margin-bottom: 0.5rem; }
+  .footer-col ul a, .footer-col .footer-contact-item { font-size: 0.72rem; line-height: 1.4; }
+  .footer-col ul { gap: 0.3rem; }
+  .footer-col .footer-contact-item { margin-bottom: 0.2rem; }
 
-  .footer-social {
-    margin-top: 0 !important;
-    flex-shrink: 0 !important;
-    margin-left: auto !important;
-  }
-
-  /* Each of the 3 columns (nav, services, visit) in 2-col layout */
-  .footer-col {
-    min-width: 0 !important;
-  }
-
-  .footer-col h4 {
-    font-size: 0.75rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  .footer-col ul a,
-  .footer-col .footer-contact-item {
-    font-size: 0.72rem !important;
-    line-height: 1.4 !important;
-  }
-
-  .footer-col ul {
-    gap: 0.3rem !important;
-  }
-
-  .footer-col .footer-contact-item {
-    margin-bottom: 0.2rem !important;
-  }
-
-  /* Visit Us takes full width so address doesn't get cut */
   .footer-col:last-child {
-    grid-column: 1 / -1 !important;
-    padding-top: 0.8rem !important;
-    border-top: 1px solid var(--border) !important;
-    display: grid !important;
-    grid-template-columns: 1fr 1fr !important;
-    gap: 0.5rem 1.5rem !important;
+    grid-column: 1 / -1;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1.5rem;
   }
 
-  .footer-col:last-child h4 {
-    grid-column: 1 / -1 !important;
-    margin-bottom: 0.3rem !important;
-  }
+  .footer-col:last-child h4 { grid-column: 1 / -1; margin-bottom: 0.3rem; }
 
   .footer-bottom {
-    padding: 0.9rem 1.2rem !important;
-    flex-direction: column !important;
-    align-items: flex-start !important;
-    gap: 0.4rem !important;
+    padding: 0.9rem 1.2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
   }
 
-  .footer-copy {
-    font-size: 0.65rem !important;
-  }
-
-  .footer-bottom-links {
-    gap: 1rem !important;
-  }
-
-  .footer-bottom-links a {
-    font-size: 0.65rem !important;
-  }
+  .footer-copy { font-size: 0.65rem; }
+  .footer-bottom-links { gap: 1rem; }
+  .footer-bottom-links a { font-size: 0.65rem; }
 }
 
-
-/* ============================================================
-   LIGHT THEME OVERRIDES
-   Catches hardcoded rgba dark values that variables won't fix
-   ============================================================ */
-
-/* Body and base */
-body {
-  background: #F5F2EE !important;
+/* ─────────────────────────────────────────────
+   RESPONSIVE — SMALL MOBILE (max-width: 480px)
+   ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+  .brand-wall-grid { grid-template-columns: repeat(2, 1fr); }
+  .hero-title { font-size: clamp(3.5rem, 14vw, 5rem); }
+  .explore-brand-img-wrap { height: 180px; }
 }
 
-body::before {
-  background-image: url('assets/hero-bg.jpg');
-  background-size: cover;
-  background-position: center;
-  opacity: 0.06 !important;
-}
+/* ─────────────────────────────────────────────
+   PROFESSIONAL POLISH
+   ─────────────────────────────────────────────
 
-/* Nav */
+   1. Nav border bottom more defined — light theme
+      navs need a stronger bottom edge or they float
+   2. Section titles need a consistent max-width so
+      long headlines don't stretch wall to wall
+   3. Body text size bump — 0.85rem is too small for
+      premium brand perception. 0.92rem reads better.
+   4. Ember buttons get a very subtle box shadow —
+      makes them feel physical and clickable
+   5. Brand card images get a consistent aspect ratio
+      enforced so the grid never looks uneven
+   ─────────────────────────────────────────────── */
+
+/* 1. Nav bottom edge */
 nav {
-  background: rgba(245, 242, 238, 0.96) !important;
-  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
+  border-bottom: 1px solid rgba(0,0,0,0.12) !important;
+  box-shadow: 0 1px 12px rgba(0,0,0,0.06);
 }
 
-nav.scrolled {
-  background: rgba(245, 242, 238, 0.99) !important;
-}
-
-.nav-links a {
-  color: #4A4540 !important;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--ember) !important;
-  background: rgba(0,0,0,0.04) !important;
-}
-
-/* Hamburger bars */
-.nav-hamburger span {
-  background: #1A1715 !important;
-}
-
-/* Mobile drawer */
-.nav-drawer {
-  background: #EDEAE6 !important;
-}
-
-.nav-drawer a {
-  color: #4A4540 !important;
-  border-bottom-color: rgba(0,0,0,0.08) !important;
-}
-
-.nav-drawer a:first-child {
-  border-top-color: rgba(0,0,0,0.08) !important;
-}
-
-/* Hero overlay — lighter so background shows warmly */
-.hero-overlay {
-  background: linear-gradient(
-    105deg,
-    rgba(245, 242, 238, 0.88) 0%,
-    rgba(245, 242, 238, 0.70) 55%,
-    rgba(212, 84, 30, 0.06) 100%
-  ) !important;
-}
-
-.hero-title .outline {
-  -webkit-text-stroke: 2px rgba(26, 23, 21, 0.25) !important;
-}
-
-.hero-bg-text {
-  -webkit-text-stroke: 1px rgba(0,0,0,0.04) !important;
-}
-
-/* Marquee */
-.marquee-strip {
-  background: #EDEAE6 !important;
-  border-color: rgba(0,0,0,0.08) !important;
-}
-
-.marquee-item {
-  color: #4A4540 !important;
-}
-
-/* Service pillars */
-.service-pillar {
-  background: rgba(237, 234, 230, 0.90) !important;
-}
-
-.service-pillar:hover {
-  background: rgba(228, 224, 219, 0.95) !important;
-}
-
-/* Brand wall */
-.brand-wall-section {
-  background: rgba(237, 234, 230, 0.90) !important;
-}
-
-.brand-wall-tile {
-  background: rgba(245, 242, 238, 0.95) !important;
-}
-
-.brand-wall-tile:hover {
-  background: #FFFFFF !important;
-}
-
-/* About preview */
-.about-preview-content {
-  background: rgba(237, 234, 230, 0.92) !important;
-}
-
-/* Reviews */
-.reviews-section {
-  background: rgba(237, 234, 230, 0.85) !important;
-}
-
-.review-card {
-  background: rgba(245, 242, 238, 0.92) !important;
-}
-
-.review-card:hover {
-  background: #FFFFFF !important;
-}
-
-.reviews-carousel-track .review-card {
-  background: rgba(245, 242, 238, 0.95) !important;
-}
-
-.reviews-carousel-controls {
-  background: rgba(232, 228, 222, 0.95) !important;
-}
-
-.reviews-carousel-dot {
-  background: #C8C2BA !important;
-}
-
-.reviews-carousel-dot.active {
-  background: var(--ember) !important;
-}
-
-/* Page hero on inner pages */
-.page-hero {
-  background: rgba(237, 234, 230, 0.94) !important;
-}
-
-/* Catalog filter */
-.catalog-filter {
-  background: rgba(232, 228, 222, 0.95) !important;
-  border-bottom-color: rgba(0,0,0,0.08) !important;
-}
-
-.filter-btn {
-  border-color: rgba(0,0,0,0.12) !important;
-  color: #4A4540 !important;
-  background: rgba(245,242,238,0.8) !important;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-  background: var(--ember) !important;
-  color: #fff !important;
-  border-color: var(--ember) !important;
-}
-
-/* Explore brand cards */
-.explore-brand-card {
-  background: rgba(245, 242, 238, 0.92) !important;
-}
-
-.explore-brand-card:hover {
-  background: #FFFFFF !important;
-}
-
-.explore-brand-body h3 {
-  color: #1A1715 !important;
-}
-
-.explore-brand-body p {
-  color: #4A4540 !important;
-}
-
-.explore-brand-tags span {
-  color: var(--ember) !important;
-  border-color: rgba(212,84,30,0.3) !important;
-}
-
-/* Catalog brand cards */
-.catalog-brand-card {
-  background: rgba(245, 242, 238, 0.92) !important;
-}
-
-.catalog-brand-card:hover {
-  background: #FFFFFF !important;
-}
-
-/* Service blocks */
-.service-block-content {
-  background: rgba(237, 234, 230, 0.92) !important;
-}
-
-/* About */
-.about-story-content {
-  background: rgba(237, 234, 230, 0.92) !important;
-}
-
-.about-value {
-  background: rgba(237, 234, 230, 0.80) !important;
-}
-
-.about-value:hover {
-  background: rgba(245, 242, 238, 0.95) !important;
-}
-
-.about-hours-panel {
-  background: rgba(237, 234, 230, 0.92) !important;
-}
-
-/* Contact */
-.contact-info-panel {
-  background: rgba(237, 234, 230, 0.92) !important;
-}
-
-.contact-form-panel {
-  background: rgba(228, 224, 219, 0.92) !important;
-}
-
-.form-field {
-  background: rgba(245, 242, 238, 0.95) !important;
-}
-
-.form-field:focus-within {
-  background: #FFFFFF !important;
-}
-
-.form-field input,
-.form-field select,
-.form-field textarea {
-  color: #1A1715 !important;
-}
-
-.form-field label {
-  color: #807870 !important;
-}
-
-.form-submit-row {
-  background: rgba(232, 228, 222, 0.95) !important;
-}
-
-/* Hero stats */
-.hero-stat {
-  background: rgba(212, 84, 30, 0.07) !important;
-}
-
-/* Footer */
-footer {
-  background: #EDEAE6 !important;
-}
-
-.footer-top {
-  border-bottom-color: rgba(0,0,0,0.08) !important;
-}
-
-.footer-brand p {
-  color: #807870 !important;
-}
-
-.footer-col h4 {
-  color: #1A1715 !important;
-}
-
-.footer-col ul a,
-.footer-col .footer-contact-item {
-  color: #807870 !important;
-}
-
-.footer-col ul a:hover,
-.footer-col .footer-contact-item a:hover {
-  color: var(--ember) !important;
-}
-
-.footer-social a {
-  color: #807870 !important;
-  border-color: rgba(0,0,0,0.12) !important;
-}
-
-.footer-bottom {
-  background: rgba(232, 228, 222, 0.95) !important;
-}
-
-.footer-copy {
-  color: #807870 !important;
-}
-
-.footer-bottom-links a {
-  color: #807870 !important;
-}
-
-/* Progress bar stays ember */
-#progress-bar {
-  background: linear-gradient(90deg, var(--ember), var(--gold)) !important;
-}
-
-/* Back to top */
-#back-top {
-  background: var(--ember) !important;
-}
-
-/* Sections with inline dark backgrounds */
-.reviews-section,
-.services-section,
-.process-section,
-.contact-section {
-  background: rgba(237, 234, 230, 0.85) !important;
-}
-
-/* CTA band overlay stays dark for contrast */
-.cta-band::before {
-  background: rgba(26, 23, 21, 0.80) !important;
-}
-
-/* Product cards on explore */
-.product-card {
-  background: rgba(245, 242, 238, 0.92) !important;
-}
-
-.product-card:hover {
-  background: #FFFFFF !important;
-}
-
-.product-name {
-  color: #1A1715 !important;
-}
-
-/* Hours grid rows */
-.hours-row {
-  border-bottom-color: rgba(0,0,0,0.08) !important;
-}
-
-.hours-row .day {
-  color: #1A1715 !important;
-}
-
-.hours-row .time {
-  color: #4A4540 !important;
-}
-
-/* Section text */
+/* 2. Section title max-width */
 .section-title {
-  color: #1A1715 !important;
+  max-width: 700px;
 }
 
-.section-subtitle {
-  color: #4A4540 !important;
-}
-
-/* Service includes bullets */
-.service-includes li {
-  color: #4A4540 !important;
-}
-
-/* Contact detail labels and values */
-.contact-detail-label {
-  color: #807870 !important;
-}
-
-.contact-detail-value {
-  color: #1A1715 !important;
-}
-
-/* Review blockquotes */
-.review-card blockquote {
-  color: #4A4540 !important;
-}
-
-.review-name {
-  color: #1A1715 !important;
-}
-
-.review-platform {
-  color: #807870 !important;
-}
-
-/* About preview blockquote */
-.about-preview-content blockquote {
-  color: #4A4540 !important;
-}
-
-.about-preview-content p {
-  color: #4A4540 !important;
-}
-
-/* Brand wall tiles on hover */
-.brand-wall-tile:hover::before {
-  background: var(--ember-glow) !important;
-  opacity: 0.6 !important;
-}
-
-
-/* ============================================================
-   PATCH 14 — Light mode cleanup:
-   1. Footer light
-   2. Background visible through sections (remove white wash)
-   3. Hero background visible
-   4. Service count boxes light
-   5. Store front — remove white space, text fully on image
-   6. Stat bars light
-   ============================================================ */
-
-/* ── FIX 1: Footer fully light ── */
-footer,
-footer .footer-top,
-footer .footer-bottom {
-  background: #EDEAE6 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.footer-top {
-  border-bottom: 1px solid rgba(0,0,0,0.1) !important;
-}
-
-.footer-bottom {
-  background: #E4E0DB !important;
-}
-
-/* ── FIX 2 & 3: Background visible through ALL sections ──
-   Remove the heavy rgba overlays that are washing out white.
-   Sections get very light semi-transparent backgrounds so
-   the hero image bleeds through subtly on light bg. */
-
-body::before {
-  opacity: 0.04 !important;
-}
-
-/* Remove all the aggressive backdrop-filter and heavy backgrounds */
-.marquee-strip,
-.brand-strip-section,
-.brand-wall-section,
-.reviews-section,
-.about-preview-content,
-.service-block-content,
-.about-story-content,
-.contact-info-panel,
-.contact-form-panel,
-.catalog-filter,
-.catalog-category,
-.page-hero,
-.footer-top,
-footer {
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-/* Light transparent backgrounds — let content breathe */
-.service-pillar {
-  background: rgba(245, 242, 238, 0.85) !important;
-  backdrop-filter: none !important;
-}
-
-.about-preview-content {
-  background: rgba(237, 234, 230, 0.88) !important;
-}
-
-.review-card,
-.reviews-carousel-track .review-card {
-  background: rgba(255, 255, 255, 0.82) !important;
-}
-
-.reviews-carousel-controls {
-  background: rgba(228, 224, 218, 0.92) !important;
-}
-
-.explore-brand-card {
-  background: rgba(255, 255, 255, 0.85) !important;
-}
-
-.explore-brand-card:hover {
-  background: rgba(255, 255, 255, 0.98) !important;
-}
-
-.brand-wall-tile {
-  background: rgba(255, 255, 255, 0.80) !important;
-}
-
-.brand-wall-tile:hover {
-  background: rgba(255, 255, 255, 0.98) !important;
-}
-
-/* Hero: remove the heavy light overlay so background shows */
-.hero-overlay {
-  background: linear-gradient(
-    105deg,
-    rgba(245, 242, 238, 0.72) 0%,
-    rgba(245, 242, 238, 0.45) 55%,
-    rgba(212, 84, 30, 0.04) 100%
-  ) !important;
-}
-
-/* Page hero inner pages — minimal overlay */
-.page-hero {
-  background: rgba(245, 242, 238, 0.78) !important;
-  backdrop-filter: none !important;
-}
-
-/* Catalog filter */
-.catalog-filter {
-  background: rgba(237, 234, 230, 0.92) !important;
-}
-
-/* ── FIX 4: Service count boxes — light ── */
-.about-value {
-  background: rgba(255, 255, 255, 0.75) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: 1px solid rgba(0,0,0,0.06) !important;
-}
-
-.about-value:hover {
-  background: rgba(255, 255, 255, 0.95) !important;
-}
-
-.about-value-num {
-  color: var(--ember) !important;
-  opacity: 0.5 !important;
-}
-
-.about-value h3 {
-  color: #1A1715 !important;
-}
-
+/* 3. Body text size — more premium feel */
+.service-pillar p,
+.about-preview-content p,
+.explore-brand-body p,
+.service-block-content p,
+.about-story-content p,
+.review-card blockquote,
 .about-value p {
-  color: #4A4540 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.75 !important;
 }
 
-/* The grid wrapper */
-div[style*="minmax(240px"] {
-  background: rgba(0,0,0,0.04) !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
-  border-top: 2px solid var(--ember) !important;
+/* 4. Primary buttons get shadow — feel more clickable */
+.btn-primary, .btn-catalog, .nav-cta, .form-submit {
+  box-shadow: 0 2px 8px rgba(212,84,30,0.30);
 }
 
-/* ── FIX 5: Store front — full bleed, text fully on photo ── */
-.store-front-wrap {
-  margin: 0 !important;  /* Remove side margin so it's full width */
-  border: none !important;
-  border-radius: 0 !important;
-  position: relative !important;
-  overflow: hidden !important;
-  width: 100% !important;
+.btn-primary:hover, .btn-catalog:hover, .nav-cta:hover, .form-submit:hover {
+  box-shadow: 0 4px 16px rgba(212,84,30,0.40);
 }
 
-.store-front-wrap img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: none !important;
-  object-fit: contain !important;
-  object-position: center center !important;
-  display: block !important;
+/* 5. Brand card images consistent height */
+.explore-brand-img-wrap {
+  height: 200px !important;
 }
 
-/* Gradient overlay — stronger so text at bottom is always readable */
-.store-front-overlay {
-  background: linear-gradient(
-    to bottom,
-    transparent 40%,
-    rgba(26, 23, 21, 0.55) 70%,
-    rgba(26, 23, 21, 0.82) 100%
-  ) !important;
+.explore-brand-img-wrap img:first-child {
+  height: 100% !important;
+  object-fit: cover !important;
 }
 
-/* Badge and text sit at bottom of image */
-.store-badge {
-  position: absolute !important;
-  bottom: 1.5rem !important;
-  left: 1.5rem !important;
-  z-index: 2 !important;
-  right: 1.5rem !important;
+
+/* Store front split — PC has margins, mobile stacks image below text */
+.about-story-storefront {
+  margin: 0 2.6rem;
 }
 
-.store-badge .relocating-badge {
-  background: rgba(212, 84, 30, 0.9) !important;
-  color: #fff !important;
-  border-color: transparent !important;
-}
+@media (max-width: 900px) {
+  .about-story-storefront {
+    margin: 0 !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    /* Reverse order so image shows after text on mobile */
+    display: flex !important;
+    flex-direction: column !important;
+  }
 
-.store-badge .relocating-badge::before {
-  background: #fff !important;
-}
+  /* On mobile, push the image to bottom by reversing order */
+  .about-story-storefront .about-story-content {
+    order: 1;
+  }
 
-/* The "Weatherford TX" text — force white so it reads on photo */
-.store-badge > div:last-child {
-  color: #FFFFFF !important;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.6) !important;
-}
-
-/* ── FIX 6: Stat bars — light mode ── */
-.hero-stat {
-  background: rgba(255, 255, 255, 0.70) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-.hero-stats,
-[style*="grid-template-columns:repeat(auto-fit, minmax(160px"] {
-  background: rgba(255, 255, 255, 0.70) !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border: 1px solid rgba(180,100,20,0.2) !important;
-  border-top: 3px solid var(--ember) !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.06) !important;
-}
-
-.hero-stat-num {
-  color: #1A1715 !important;
-  text-shadow: none !important;
-}
-
-.hero-stat-label {
-  color: var(--ember) !important;
-  text-shadow: none !important;
+  .about-story-storefront .about-story-img {
+    order: 2;
+    min-height: 280px !important;
+  }
 }
