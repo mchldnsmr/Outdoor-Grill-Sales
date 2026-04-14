@@ -26,7 +26,7 @@
   --text:         #1A1715;
   --text-muted:   #4A4540;
   --text-dim:     #807870;
-  --card:         rgba(255, 255, 255, 0.78);
+  --card:         rgba(255, 255, 255, 0.92);
   --card-hover:   rgba(255, 255, 255, 0.97);
 }
 
@@ -55,7 +55,7 @@ body::before {
   background-position: center;
   z-index: -2;
   pointer-events: none;
-  opacity: 0.48;
+  opacity: 0.90;
 }
 
 img { max-width: 100%; display: block; }
@@ -446,7 +446,7 @@ section { padding: 4.5rem 2.6rem; }
   background: linear-gradient(
     105deg,
     rgba(245,242,238,0.82) 0%,
-    rgba(245,242,238,0.52) 40%,
+    rgba(245,242,238,0.92) 40%,
     rgba(245,242,238,0.08) 70%,
     rgba(212,84,30,0.01) 100%
   );
@@ -507,7 +507,7 @@ section { padding: 4.5rem 2.6rem; }
 
 .hero-stat {
   padding: 1.2rem 2.2rem;
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   border-right: 1px solid var(--border-warm);
   text-align: center;
   position: relative;
@@ -562,7 +562,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .service-pillar {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
@@ -585,7 +585,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .service-pillar:hover {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
 }
 
@@ -663,7 +663,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .brand-wall-tile {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -736,7 +736,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .about-preview-content {
-  background: rgba(237,234,230,0.78);
+  background: rgba(237,234,230,0.92);
   padding: 3.5rem;
   display: flex;
   flex-direction: column;
@@ -838,7 +838,7 @@ section { padding: 4.5rem 2.6rem; }
 
 .reviews-carousel-btn:hover { border-color: var(--ember); color: var(--ember); }
 
-.review-card { background: rgba(255,255,255,0.78); display: flex; flex-direction: column; gap: 1rem; transition: background 0.25s; }
+.review-card { background: rgba(255,255,255,0.92); display: flex; flex-direction: column; gap: 1rem; transition: background 0.25s; }
 .review-card:hover { background: rgba(255,255,255,0.72); }
 .review-stars { color: var(--gold); font-size: 0.85rem; letter-spacing: 0.08em; }
 .review-card blockquote { font-family: 'Crimson Pro', serif; font-size: 1rem; line-height: 1.7; color: var(--text-muted); font-style: italic; font-weight: 300; flex: 1; border-left: 2px solid var(--ember); padding-left: 1rem; }
@@ -887,7 +887,7 @@ section { padding: 4.5rem 2.6rem; }
   background: linear-gradient(
     105deg,
     rgba(245,242,238,0.82) 0%,
-    rgba(245,242,238,0.52) 40%,
+    rgba(245,242,238,0.92) 40%,
     rgba(245,242,238,0.08) 70%,
     rgba(212,84,30,0.01) 100%
   );
@@ -971,7 +971,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .explore-brand-card {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   display: flex;
   flex-direction: column;
   transition: background 0.25s, box-shadow 0.25s;
@@ -982,7 +982,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .explore-brand-card:hover {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   box-shadow: 0 6px 24px rgba(0,0,0,0.10);
 }
 
@@ -1005,7 +1005,7 @@ section { padding: 4.5rem 2.6rem; }
   width: 100%;
   height: 220px;
   overflow: hidden;
-  background: rgba(228,224,218,0.52);
+  background: rgba(228,224,218,0.92);
   flex-shrink: 0;
 }
 
@@ -1092,7 +1092,7 @@ section { padding: 4.5rem 2.6rem; }
 .service-block:hover .service-block-img img { transform: scale(1.04); }
 
 .service-block-content {
-  background: rgba(237,234,230,0.52);
+  background: rgba(237,234,230,0.92);
   padding: 2.3rem;
   display: flex;
   flex-direction: column;
@@ -1110,7 +1110,7 @@ section { padding: 4.5rem 2.6rem; }
 
 /* Service count boxes (Why OGS section) */
 .about-value {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   padding: 2.5rem 2rem;
   display: flex;
   flex-direction: column;
@@ -1154,7 +1154,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .about-story-content {
-  background: rgba(237,234,230,0.52);
+  background: rgba(237,234,230,0.92);
   padding: 2.6rem;
   display: flex;
   flex-direction: column;
@@ -1188,7 +1188,7 @@ section { padding: 4.5rem 2.6rem; }
 .store-front-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent 35%, rgba(26,23,21,0.45) 65%, rgba(26,23,21,0.78) 100%);
+  background: linear-gradient(to bottom, transparent 35%, rgba(26,23,21,0.45) 65%, rgba(26,23,21,0.92) 100%);
   z-index: 1;
   pointer-events: none;
 }
@@ -1224,7 +1224,7 @@ section { padding: 4.5rem 2.6rem; }
 
 /* Stat bar */
 .about-stats-grid {
-  background: rgba(255,255,255,0.78);
+  background: rgba(255,255,255,0.92);
   border: 1px solid var(--border-warm);
   border-top: 3px solid var(--ember);
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
@@ -1272,7 +1272,7 @@ section { padding: 4.5rem 2.6rem; }
 }
 
 .contact-info-panel {
-  background: rgba(237,234,230,0.52);
+  background: rgba(237,234,230,0.92);
   padding: 2.3rem;
   display: flex;
   flex-direction: column;
@@ -1302,7 +1302,7 @@ section { padding: 4.5rem 2.6rem; }
 .contact-detail-value a { color: var(--text); transition: color 0.2s; }
 .contact-detail-value a:hover { color: var(--ember); }
 
-.contact-form-panel { background: rgba(228,224,218,0.78); padding: 2.3rem; }
+.contact-form-panel { background: rgba(228,224,218,0.92); padding: 2.3rem; }
 .contact-form-panel h3 { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.03em; margin-bottom: 2rem; color: var(--text); }
 
 .form-grid { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
@@ -1524,10 +1524,9 @@ footer {
   .page-top { padding-top: 64px; }
 
   /* Sections */
-  section { padding: 3rem 1.2rem; }
 
   /* Sections */
-  section { padding: 3rem 0 !important; }
+  section { padding: 3rem 1.2rem !important; }
 
   /* Hero */
   .hero { padding: 6rem 1.2rem 3.5rem; }
